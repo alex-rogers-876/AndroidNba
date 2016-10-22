@@ -5,9 +5,10 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 
 public interface APIPlug {
-    @GET("{id}")
-    Call<List<NbaResults>> createStats(@Path("id") int id);
+    @GET("/nba")
+    Call<List<NbaResults>> createStats(@Query("playerId") int id);
 }

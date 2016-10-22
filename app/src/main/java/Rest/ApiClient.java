@@ -17,7 +17,7 @@ import retrofit2.Retrofit;
 public class ApiClient  {
 
         private static APIPlug REST_CLIENT;
-        private static final String API_URL = "http://192.168.1.10:8083/api/getstats/index/"; //Change according to your API path.
+        private static final String API_URL = "http://192.168.1.24:3000"; //Change according to your API path.
         static MainActivity mActivity= new MainActivity();
         static {
             setupRestClient();
