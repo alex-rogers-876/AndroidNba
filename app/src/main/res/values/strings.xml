@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AndroidNba</string>
+    <string name="playerTitle">Choose Player</string>
 </resources>

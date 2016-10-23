@@ -18,5 +18,16 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="80dp"
         android:layout_marginTop="147dp"
-        android:id="@+id/fragment" />
+        android:id="@+id/fragment"
+        tools:layout="@layout/stats_view" />
+
+    <fragment
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:name="com.example.cowmo.androidnba.ChooseFragment"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="23dp"
+        android:id="@+id/fragment2"
+        tools:layout="@layout/choose_view"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

@@ -17,7 +17,7 @@ import retrofit2.Retrofit;
 public class ApiClient  {
 
         private static APIPlug REST_CLIENT;
-        private static final String API_URL = "http://192.168.1.24:3000"; //Change according to your API path.
+        private static final String API_URL = "http://192.168.1.9:3000"; //Change according to your API path.
         static MainActivity mActivity= new MainActivity();
         static {
             setupRestClient();
@@ -50,7 +50,7 @@ public class ApiClient  {
 
             REST_CLIENT = retrofit.create(APIPlug.class);
         }
-    public static void getPlayer(int playerId){
+    public void getPlayer(int playerId){
         Call<List<NbaResults>> call = REST_CLIENT.createStats(playerId);
         call.enqueue(new Callback<List<NbaResults>>() {
             @Override
