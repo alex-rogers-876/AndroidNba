@@ -1,11 +1,18 @@
 package Rest;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 
 import com.example.cowmo.androidnba.MainActivity;
 
+import java.io.IOException;
 import java.util.List;
 
+import Async.Async;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -14,11 +21,13 @@ import retrofit2.GsonConverterFactory;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class ApiClient  {
+public class ApiClient extends Activity {
 
-        private static APIPlug REST_CLIENT;
+        public static APIPlug REST_CLIENT;
         private static final String API_URL = "http://192.168.1.9:3000"; //Change according to your API path.
+
         static MainActivity mActivity= new MainActivity();
+       // static Async mAsync = new Async();
         static {
             setupRestClient();
         }
@@ -51,12 +60,58 @@ public class ApiClient  {
             REST_CLIENT = retrofit.create(APIPlug.class);
         }
     public void getPlayer(int playerId){
+
+
+
+
+
         Call<List<NbaResults>> call = REST_CLIENT.createStats(playerId);
+
+        try{
+           List<NbaResults> nba =  call.execute().body() ;
+        }
+      catch (Exception ex){
+            Log.i("1", ex.getMessage());
+      }
+
+
         call.enqueue(new Callback<List<NbaResults>>() {
             @Override
             public void onResponse(Call<List<NbaResults>> call, Response<List<NbaResults>> response) {
+                try{
+                    //Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
+                    ArrayAdapter<String> seasonAdaptor;
+                    String[] stringSeasons = new String[response.body().size()];
 
-                mActivity.showData(response);
+                    for(int i = 0; i < response.body().size(); i++){
+                        stringSeasons[i] = response.body().get(i).mSeasonId.toString();
+                    }
+                   // mActivity.setSeasonSpinner(stringSeasons);
+
+                   // myIntent.putExtra("Seasons", stringSeasons);
+                  //  startActivity(myIntent);
+/*
+                    seasonAdaptor = mActivity.setPlayerSpinner(stringSeasons);
+
+                    mActivity.spinnerSeasons.setAdapter(seasonAdaptor);
+                    mActivity.spinnerSeasons.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });*/
+                }
+                catch (Exception ex){
+                    Log.v("1", ex.getMessage());
+                }
+
+
+               // mActivity.showData(response);
             }
 
             @Override
