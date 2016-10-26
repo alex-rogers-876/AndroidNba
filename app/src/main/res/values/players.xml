@@ -8,4 +8,41 @@
             Marc Gasol,201188
         </item>
     </array>
+    <array name="Hawks">
+    </array>
+    <array name="Nets">
+        <item>Anthony Bennet,203461</item>
+        <item>Bojan Bogdanovic,202711</item>
+        <item>Trevor Booker,202344</item>
+        <item>Randy Foye,200751</item>
+        <item>Justin Hamilton,203120</item>
+        <item>Joe Harris,203925</item>
+        <item>Rondae Hollis-Jefferson,1626178</item>
+        <item>Sean Kilpatrick,203930</item>
+        <item>Caris Levert,1627747</item>
+        <item>Jeremy Lin,202391</item>
+        <item>Brook Lopez,201572</item>
+        <item>Chris Mccullough,1626191</item>
+        <item>Luis Scola,2449</item>
+        <item>Greivis Vasquez,202349</item>
+        <item>Isaiah Whitehead,1627785</item>
+    </array>
+    <array name="Rockets">
+        <item>Ryan Anderson,201583</item>
+        <item>Trevor Ariza,2772</item>
+        <item>Patrick Beverley,201976</item>
+        <item>Corey Brewer,201147</item>
+        <item>Clint Capela,203991</item>
+        <item>James Harden,201935</item>
+    </array>
+    <array name="Cavaliers">
+        <item>Chris Andersen,2365</item>
+        <item>Mike Dunleavy,2399</item>
+        <item>Channing Frye,101112</item>
+        <item>Kyrie Irving,202681</item>
+        <item>Lebron James,2544</item>
+        <item>Richard Jefferson,2210</item>
+        <item>James Jones,2592</item>
+        <item>Kevin Love,201567</item>
+    </array>
 </resources>

@@ -27,26 +27,15 @@ import retrofit2.Call;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity{
-
-    public String[] playerName;
+    public String[] playerName,stringSeasons;
     public int[] playerId;
-    public String[] stringSeasons;
     public static Response<List<NbaResults>> allSeasonData;
     public  ArrayAdapter<CharSequence> adapter;
-    ArrayAdapter<String> seasonAdaptor;
-    final int PLAYER_JSON_COUNT = 2;
-
-    static TextView tv1;
-    Spinner spinnerTeams;
-    Spinner spinnerPlayers;
-
-    public Spinner spinnerSeasons;
-    MyAsyncTask asycy = new MyAsyncTask();
-    TeamPlayerSplitter[] Splitter;
+    static TextView tv1, ptsResult, astResult, rebResult;
+    private Spinner spinnerTeams, spinnerPlayers, spinnerSeasons;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
 
         super.onCreate(savedInstanceState);
 
@@ -57,9 +46,13 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onStart() {
         tv1 = (TextView)findViewById(R.id.textFgm);
+        ptsResult = (TextView)findViewById(R.id.ptsMainResult);
+        rebResult = (TextView)findViewById(R.id.rebMainResult);
+        astResult = (TextView)findViewById(R.id.astMainResult);
         spinnerTeams = (Spinner) findViewById(R.id.spinner);
         spinnerPlayers = (Spinner)findViewById(R.id.spinnerPlayers);
         spinnerSeasons = (Spinner)findViewById(R.id.spinnerYear);
+
         adapter = ArrayAdapter.createFromResource(
                 this, R.array.Teams, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -72,60 +65,45 @@ public class MainActivity extends AppCompatActivity{
                 if(splitTeam[1].equals("Angeles") || splitTeam[1].equals("City")) {
                     tv1.setText(splitTeam[2]);
                 }
-                else{
-                    switch(splitTeam[1]){
+                else {
+                    String[] team = null;
+                    boolean haveMatched = true;
+                    switch (splitTeam[1]) {
                         case "Grizzlies":
-
-                            String[] team = getResources().getStringArray(R.array.Grizzlies);
-                            String[] playerInfo;
-                            //  playerInfo = team[0].split(",");
-                            separatePlayerNameAndId(team);
-                            playerAdaptor = setPlayerSpinner(playerName);
-                            spinnerPlayers.setAdapter(playerAdaptor);
-                            // mAsync.setSpinnerPlayers(spinnerPlayers);
-                            spinnerPlayers.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                @Override
-                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                    // mAsync.execute(position);
-                                    //Intent intent = getIntent();
-
-                                 //   Call<List<NbaResults>> call = apiy.REST_CLIENT.createStats(playerId[position]);
-
-                                    try{
-
-                                           new MyAsyncTask().execute(playerId[position]);
-                                    }
-                                    catch (Exception ex){
-                                        Log.i("1", ex.getMessage());
-                                    }
-
-
-                                    seasonAdaptor = setPlayerSpinner(stringSeasons);
-
-                                    spinnerSeasons.setAdapter(seasonAdaptor);
-                                    spinnerSeasons.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                        @Override
-                                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                                        }
-
-                                        @Override
-                                        public void onNothingSelected(AdapterView<?> parent) {
-
-                                        }
-                                    });
-                                }
-
-                                @Override
-                                public void onNothingSelected(AdapterView<?> parent) {
-
-                                }
-                            });
-
+                            team = getResources().getStringArray(R.array.Grizzlies);
                             break;
-
+                        case "Nets":
+                            team = getResources().getStringArray(R.array.Nets);
+                            break;
+                        case "Rockets":
+                            team = getResources().getStringArray(R.array.Rockets);
+                            break;
+                        case "Cavaliers":
+                            team = getResources().getStringArray(R.array.Cavaliers);
+                            break;
+                        default:
+                            haveMatched = false;
                     }
-                    //tv1.setText(splitTeam[1]);
+                    if (haveMatched) {
+                        separatePlayerNameAndId(team);
+                        playerAdaptor = setPlayerSpinner(playerName);
+                        spinnerPlayers.setAdapter(playerAdaptor);
+                        // mAsync.setSpinnerPlayers(spinnerPlayers);
+                        spinnerPlayers.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                try {
+                                    new MyAsyncTask().execute(playerId[position]);
+                                } catch (Exception ex) {
+                                    Log.i("1", ex.getMessage());
+                                }
+                            }
+                            @Override
+                            public void onNothingSelected(AdapterView<?> parent) {
+                            }
+                        });
+                        //tv1.setText(splitTeam[1]);
+                    }
                 }
             }
             @Override
@@ -133,8 +111,6 @@ public class MainActivity extends AppCompatActivity{
 
             }
         });
-
-
 
     super.onStart();
     }
@@ -166,34 +142,16 @@ public class MainActivity extends AppCompatActivity{
     protected void onResume()
     {
        // apiy.getPlayer(201939);
-
         super.onResume();
     }
 
     public ArrayAdapter<String> setPlayerSpinner( String[] team){
-
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, team); //selected item will look like a spinner set from XML
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-
         return adapter;
     }
 
-    public void setSeasonSpinner(String[] stringSeasons){
-        seasonAdaptor = setPlayerSpinner(stringSeasons);
-        spinnerSeasons.setAdapter(seasonAdaptor);
-        spinnerSeasons.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-    }
 
     public void showData( Response<List<NbaResults>> data){
 
@@ -220,9 +178,10 @@ public class MainActivity extends AppCompatActivity{
 
     private class MyAsyncTask extends AsyncTask<Integer, Void,Response<List<NbaResults>>> {
         ApiClient apiy = new ApiClient();
-        public Response<List<NbaResults>> responsey;
+
         @Override
         protected Response<List<NbaResults>>  doInBackground(Integer... params) {
+            Response<List<NbaResults>> responsey = null;
             Call<List<NbaResults>> call = apiy.REST_CLIENT.createStats(params[0]);
             try{
                  responsey =  call.execute() ;
@@ -255,21 +214,25 @@ public class MainActivity extends AppCompatActivity{
 
                 // myIntent.putExtra("Seasons", stringSeasons);
                 //  startActivity(myIntent);
-/*
-                    seasonAdaptor = mActivity.setPlayerSpinner(stringSeasons);
 
-                    mActivity.spinnerSeasons.setAdapter(seasonAdaptor);
-                    mActivity.spinnerSeasons.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    seasonAdaptor = setPlayerSpinner(stringSeasons);
+
+                    spinnerSeasons.setAdapter(seasonAdaptor);
+                    spinnerSeasons.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                         //   tv1.setTextAppearance(android.R.style.TextAppearance_Large);
+                            //tv1.setTextSize(52);
+                            ptsResult.setText(Float.toString(allSeasonData.body().get(position).mPoints));
+                            rebResult.setText(Float.toString(allSeasonData.body().get(position).mTotalRebounds));
+                            astResult.setText(Float.toString(allSeasonData.body().get(position).mAssists));
                         }
 
                         @Override
                         public void onNothingSelected(AdapterView<?> parent) {
 
                         }
-                    });*/
+                    });
             }
             catch (Exception ex){
                 Log.v("1", ex.getMessage());
