@@ -12,7 +12,7 @@ import com.example.cowmo.androidnba.MainActivity;
 import java.io.IOException;
 import java.util.List;
 
-import Async.Async;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -24,8 +24,9 @@ import retrofit2.Retrofit;
 public class ApiClient extends Activity {
 
         public static APIPlug REST_CLIENT;
-        private static final String API_URL = "http://192.168.1.9:3000"; //Change according to your API path.
-
+    //9
+        //private static final String API_URL = "http://192.168.1.9:3000"; //Change according to your API path.
+    private static final String API_URL = "https://shrouded-reaches-29303.herokuapp.com";
         static MainActivity mActivity= new MainActivity();
        // static Async mAsync = new Async();
         static {

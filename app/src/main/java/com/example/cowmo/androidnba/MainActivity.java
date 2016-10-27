@@ -1,38 +1,45 @@
 package com.example.cowmo.androidnba;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.wefika.horizontalpicker.HorizontalPicker;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import Async.Async;
 import Rest.ApiClient;
 import Rest.NbaResults;
 import retrofit2.Call;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity{
+    private NumberPicker mNumberpicker;
     public String[] playerName,stringSeasons;
     public int[] playerId;
     public static Response<List<NbaResults>> allSeasonData;
     public  ArrayAdapter<CharSequence> adapter;
     static TextView tv1, ptsResult, astResult, rebResult;
     private Spinner spinnerTeams, spinnerPlayers, spinnerSeasons;
+    private RecyclerView recycler;
+    private HorizontalPicker picker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +52,7 @@ public class MainActivity extends AppCompatActivity{
 
     @Override
     protected void onStart() {
+         picker = (HorizontalPicker) findViewById(R.id.picker);
         tv1 = (TextView)findViewById(R.id.textFgm);
         ptsResult = (TextView)findViewById(R.id.ptsMainResult);
         rebResult = (TextView)findViewById(R.id.rebMainResult);
@@ -52,7 +60,7 @@ public class MainActivity extends AppCompatActivity{
         spinnerTeams = (Spinner) findViewById(R.id.spinner);
         spinnerPlayers = (Spinner)findViewById(R.id.spinnerPlayers);
         spinnerSeasons = (Spinner)findViewById(R.id.spinnerYear);
-
+       // mNumberpicker = (NumberPicker)findViewById(R.id.numberPicker);
         adapter = ArrayAdapter.createFromResource(
                 this, R.array.Teams, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -80,6 +88,33 @@ public class MainActivity extends AppCompatActivity{
                             break;
                         case "Cavaliers":
                             team = getResources().getStringArray(R.array.Cavaliers);
+                            break;
+                        case "Celtics":
+                            team = getResources().getStringArray(R.array.Celtics);
+                            break;
+                        case "Hornets":
+                            team = getResources().getStringArray(R.array.Hornets);
+                            break;
+                        case "Bucks":
+                            team = getResources().getStringArray(R.array.Bucks);
+                            break;
+                        case "Bulls":
+                            team = getResources().getStringArray(R.array.Bulls);
+                            break;
+                        case "Heat":
+                            team = getResources().getStringArray(R.array.Heat);
+                            break;
+                        case "Mavericks":
+                            team = getResources().getStringArray(R.array.Mavericks);
+                            break;
+                        case "Nuggers":
+                            team = getResources().getStringArray(R.array.Nuggets);
+                            break;
+                        case "Timberwolves":
+                            team = getResources().getStringArray(R.array.Timberwolves);
+                            break;
+                        case "Warriors":
+                            team = getResources().getStringArray(R.array.Warriors);
                             break;
                         default:
                             haveMatched = false;
@@ -118,12 +153,19 @@ public class MainActivity extends AppCompatActivity{
     public void separatePlayerNameAndId(String[] team){
        // List<List<String>> listPlayerInfo = new ArrayList<List<String>>();
         String[][] listPlayerInfo = new String[team.length][];
+        String tempName[] = new String[2];
         playerName = new String[team.length];
         playerId = new int[team.length];
         for(int i = 0; i < team.length; i++){
             try{
                // listPlayerInfo.get(i).add(team[i].split(",").toString());
                 listPlayerInfo[i] = team[i].split(",");
+                if(listPlayerInfo[i][0].toString().substring(0,1) != listPlayerInfo[i][0].toString().substring(0,1).toUpperCase()){
+                    tempName = listPlayerInfo[i][0].toString().split("/");
+                    tempName[0] = tempName[0].substring(0,1).toUpperCase() + tempName[0].substring(1).toLowerCase();
+                    tempName[1] = tempName[1].substring(0,1).toUpperCase() + tempName[1].substring(1).toLowerCase();
+                    listPlayerInfo[i][0] = tempName[0] + " " + tempName[1];
+                }
                 Log.i("1",listPlayerInfo[i][0].toString());
             }
             catch (Exception ex){
@@ -177,12 +219,28 @@ public class MainActivity extends AppCompatActivity{
     }
 
     private class MyAsyncTask extends AsyncTask<Integer, Void,Response<List<NbaResults>>> {
+
         ApiClient apiy = new ApiClient();
+    public ProgressDialog progDailog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progDailog = new ProgressDialog(MainActivity.this);
+            progDailog.setMessage("Loading...");
+            progDailog.setIndeterminate(false);
+            progDailog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progDailog.setCancelable(true);
+            progDailog.show();
+
+        }
 
         @Override
         protected Response<List<NbaResults>>  doInBackground(Integer... params) {
             Response<List<NbaResults>> responsey = null;
             Call<List<NbaResults>> call = apiy.REST_CLIENT.createStats(params[0]);
+
+
             try{
                  responsey =  call.execute() ;
 
@@ -202,6 +260,7 @@ public class MainActivity extends AppCompatActivity{
         @Override
         protected void onPostExecute(Response<List<NbaResults>>  strings) {
             super.onPostExecute(strings);
+
             try{
                 //Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
                 ArrayAdapter<String> seasonAdaptor;
@@ -214,10 +273,14 @@ public class MainActivity extends AppCompatActivity{
 
                 // myIntent.putExtra("Seasons", stringSeasons);
                 //  startActivity(myIntent);
-
+                   // mNumberpicker.setDisplayedValues(stringSeasons);
+                picker.setValues(stringSeasons);
                     seasonAdaptor = setPlayerSpinner(stringSeasons);
 
+
                     spinnerSeasons.setAdapter(seasonAdaptor);
+
+
                     spinnerSeasons.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -239,6 +302,7 @@ public class MainActivity extends AppCompatActivity{
             }
 
             allSeasonData = strings;
+            progDailog.dismiss();
             // mActivity.showData(response);
 
 
