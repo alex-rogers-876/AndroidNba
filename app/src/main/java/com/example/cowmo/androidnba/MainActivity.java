@@ -116,6 +116,9 @@ public class MainActivity extends AppCompatActivity{
                         case "Warriors":
                             team = getResources().getStringArray(R.array.Warriors);
                             break;
+                        case "76ers":
+                            team = getResources().getStringArray(R.array.p76ers);
+                            break;
                         default:
                             haveMatched = false;
                     }
@@ -218,8 +221,13 @@ public class MainActivity extends AppCompatActivity{
        // Toast.makeText(MainActivity.this, "You failed moron", Toast.LENGTH_LONG).show();
     }
 
-    private class MyAsyncTask extends AsyncTask<Integer, Void,Response<List<NbaResults>>> {
-
+    private class MyAsyncTask extends AsyncTask<Integer, Void,Response<List<NbaResults>>>  {
+HorizontalPicker.OnItemSelected pickSelect = new HorizontalPicker.OnItemSelected() {
+    @Override
+    public void onItemSelected(int index) {
+        
+    }
+};
         ApiClient apiy = new ApiClient();
     public ProgressDialog progDailog;
 
@@ -275,6 +283,7 @@ public class MainActivity extends AppCompatActivity{
                 //  startActivity(myIntent);
                    // mNumberpicker.setDisplayedValues(stringSeasons);
                 picker.setValues(stringSeasons);
+                picker.setOnItemSelectedListener(pickSelect);
                     seasonAdaptor = setPlayerSpinner(stringSeasons);
 
 
@@ -307,6 +316,8 @@ public class MainActivity extends AppCompatActivity{
 
 
         }
+
+
     }
 
 }
