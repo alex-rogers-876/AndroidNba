@@ -1,5 +1,6 @@
 package com.example.cowmo.androidnba;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -19,6 +20,8 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.wefika.horizontalpicker.HorizontalPicker;
+import com.wefika.horizontalpicker.HorizontalPicker.OnItemClicked;
+import com.wefika.horizontalpicker.HorizontalPicker.OnItemSelected;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -59,7 +62,7 @@ public class MainActivity extends AppCompatActivity{
         astResult = (TextView)findViewById(R.id.astMainResult);
         spinnerTeams = (Spinner) findViewById(R.id.spinner);
         spinnerPlayers = (Spinner)findViewById(R.id.spinnerPlayers);
-        spinnerSeasons = (Spinner)findViewById(R.id.spinnerYear);
+      //  spinnerSeasons = (Spinner)findViewById(R.id.spinnerYear);
        // mNumberpicker = (NumberPicker)findViewById(R.id.numberPicker);
         adapter = ArrayAdapter.createFromResource(
                 this, R.array.Teams, android.R.layout.simple_spinner_item);
@@ -70,13 +73,68 @@ public class MainActivity extends AppCompatActivity{
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 ArrayAdapter<String> playerAdaptor;
                 String[] splitTeam = parent.getItemAtPosition(position).toString().split(" ");
-                if(splitTeam[1].equals("Angeles") || splitTeam[1].equals("City")) {
-                    tv1.setText(splitTeam[2]);
+                String[] team = null;
+                boolean haveMatched = true;
+                if(splitTeam.length > 2) {
+                    switch (splitTeam[2]) {
+                        case "Warriors":
+                            team = getResources().getStringArray(R.array.Warriors);
+                            break;
+                        case "Clippers":
+                            team = getResources().getStringArray(R.array.Clippers);
+                            break;
+                        case "Lakers":
+                            team = getResources().getStringArray(R.array.Lakers);
+                            break;
+                        case "Knicks":
+                            team = getResources().getStringArray(R.array.Knicks);
+                            break;
+                        case "Thunder":
+                            team = getResources().getStringArray(R.array.Thunder);
+                            break;
+                        case "Blazers":
+                            team = getResources().getStringArray(R.array.Blazers);
+                            break;
+                        case "Spurs":
+                            team = getResources().getStringArray(R.array.Spurs);
+                            break;
+                        case "Pelicans":
+                            team = getResources().getStringArray(R.array.Pelicans);
+                            break;
+                        default:
+                            haveMatched = false;
+                    }
                 }
                 else {
-                    String[] team = null;
-                    boolean haveMatched = true;
                     switch (splitTeam[1]) {
+                        case "Hawks":
+                            team = getResources().getStringArray(R.array.Hawks);
+                            break;
+                        case "Pistons":
+                            team = getResources().getStringArray(R.array.Pistons);
+                            break;
+                        case "Pacers":
+                            team = getResources().getStringArray(R.array.Pacers);
+                            break;
+
+                        case "Magic":
+                            team = getResources().getStringArray(R.array.Magic);
+                            break;
+                        case "Suns":
+                            team = getResources().getStringArray(R.array.Suns);
+                            break;
+                        case "Kings":
+                            team = getResources().getStringArray(R.array.Kings);
+                            break;
+                        case "Raptors":
+                            team = getResources().getStringArray(R.array.Raptors);
+                            break;
+                        case "Jazz":
+                            team = getResources().getStringArray(R.array.Jazz);
+                            break;
+                        case "Wizards":
+                            team = getResources().getStringArray(R.array.Wizards);
+                            break;
                         case "Grizzlies":
                             team = getResources().getStringArray(R.array.Grizzlies);
                             break;
@@ -113,35 +171,33 @@ public class MainActivity extends AppCompatActivity{
                         case "Timberwolves":
                             team = getResources().getStringArray(R.array.Timberwolves);
                             break;
-                        case "Warriors":
-                            team = getResources().getStringArray(R.array.Warriors);
-                            break;
                         case "76ers":
                             team = getResources().getStringArray(R.array.p76ers);
                             break;
                         default:
                             haveMatched = false;
                     }
-                    if (haveMatched) {
-                        separatePlayerNameAndId(team);
-                        playerAdaptor = setPlayerSpinner(playerName);
-                        spinnerPlayers.setAdapter(playerAdaptor);
-                        // mAsync.setSpinnerPlayers(spinnerPlayers);
-                        spinnerPlayers.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                            @Override
-                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                try {
-                                    new MyAsyncTask().execute(playerId[position]);
-                                } catch (Exception ex) {
-                                    Log.i("1", ex.getMessage());
-                                }
+
+                }
+                if (haveMatched) {
+                    separatePlayerNameAndId(team);
+                    playerAdaptor = setPlayerSpinner(playerName);
+                    spinnerPlayers.setAdapter(playerAdaptor);
+                    // mAsync.setSpinnerPlayers(spinnerPlayers);
+                    spinnerPlayers.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            try {
+                                new MyAsyncTask().execute(playerId[position]);
+                            } catch (Exception ex) {
+                                Log.i("1", ex.getMessage());
                             }
-                            @Override
-                            public void onNothingSelected(AdapterView<?> parent) {
-                            }
-                        });
-                        //tv1.setText(splitTeam[1]);
-                    }
+                        }
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+                        }
+                    });
+                    //tv1.setText(splitTeam[1]);
                 }
             }
             @Override
@@ -186,7 +242,6 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onResume()
     {
-       // apiy.getPlayer(201939);
         super.onResume();
     }
 
@@ -196,25 +251,14 @@ public class MainActivity extends AppCompatActivity{
         return adapter;
     }
 
-
-
     public void showData( Response<List<NbaResults>> data){
 
         try {
-      // make foreach here
             allSeasonData = data;
-            //tv1.append(new Gson().toJson(data.body().get(0).mPoints));
         }
         catch (Exception ex){
             Log.v("1", ex.getMessage());
         }
-       // Toast.makeText(this, data, Toast.LENGTH_LONG).show();
-       // Toast.makeText(MainActivity.this, "test", Toast.LENGTH_LONG).show();
-        //Log.v("1", "test");
-
-       // Log.v("1", new Gson().toJson(data.body().get(0).mId));
-
-
     }
 
     public void failMessage(){
@@ -222,18 +266,16 @@ public class MainActivity extends AppCompatActivity{
     }
 
     private class MyAsyncTask extends AsyncTask<Integer, Void,Response<List<NbaResults>>>  {
-HorizontalPicker.OnItemSelected pickSelect = new HorizontalPicker.OnItemSelected() {
-    @Override
-    public void onItemSelected(int index) {
-        
-    }
-};
+
         ApiClient apiy = new ApiClient();
-    public ProgressDialog progDailog;
+    private ProgressDialog progDailog;
+        private SeasonSelector seasonSelector;
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+
+
             progDailog = new ProgressDialog(MainActivity.this);
             progDailog.setMessage("Loading...");
             progDailog.setIndeterminate(false);
@@ -252,6 +294,7 @@ HorizontalPicker.OnItemSelected pickSelect = new HorizontalPicker.OnItemSelected
             try{
                  responsey =  call.execute() ;
 
+
             }
             catch (Exception ex){
                 Log.i("1", ex.getMessage());
@@ -268,9 +311,10 @@ HorizontalPicker.OnItemSelected pickSelect = new HorizontalPicker.OnItemSelected
         @Override
         protected void onPostExecute(Response<List<NbaResults>>  strings) {
             super.onPostExecute(strings);
-
+            allSeasonData = strings;
             try{
                 //Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
+                seasonSelector = new SeasonSelector();
                 ArrayAdapter<String> seasonAdaptor;
                  stringSeasons = new String[strings.body().size()];
 
@@ -283,7 +327,8 @@ HorizontalPicker.OnItemSelected pickSelect = new HorizontalPicker.OnItemSelected
                 //  startActivity(myIntent);
                    // mNumberpicker.setDisplayedValues(stringSeasons);
                 picker.setValues(stringSeasons);
-                picker.setOnItemSelectedListener(pickSelect);
+                picker.setSelectedItem(allSeasonData.body().size());
+/*
                     seasonAdaptor = setPlayerSpinner(stringSeasons);
 
 
@@ -304,13 +349,13 @@ HorizontalPicker.OnItemSelected pickSelect = new HorizontalPicker.OnItemSelected
                         public void onNothingSelected(AdapterView<?> parent) {
 
                         }
-                    });
+                    });*/
             }
             catch (Exception ex){
                 Log.v("1", ex.getMessage());
             }
 
-            allSeasonData = strings;
+
             progDailog.dismiss();
             // mActivity.showData(response);
 
@@ -319,5 +364,32 @@ HorizontalPicker.OnItemSelected pickSelect = new HorizontalPicker.OnItemSelected
 
 
     }
+    public class SeasonSelector implements OnItemClicked, OnItemSelected {
+
+        public SeasonSelector(){
+            HorizontalPicker picker = (HorizontalPicker) findViewById(R.id.picker);
+            picker.setOnItemClickedListener(this);
+            picker.setOnItemSelectedListener(this);
+            ptsResult.setText(Float.toString(allSeasonData.body().get(picker.getSelectedItem()).mPoints));
+            rebResult.setText(Float.toString(allSeasonData.body().get(picker.getSelectedItem()).mTotalRebounds));
+            astResult.setText(Float.toString(allSeasonData.body().get(picker.getSelectedItem()).mAssists));
+        }
+
+        @Override
+        public void onItemSelected(int index)    {
+            ptsResult.setText(Float.toString(allSeasonData.body().get(index).mPoints));
+            rebResult.setText(Float.toString(allSeasonData.body().get(index).mTotalRebounds));
+            astResult.setText(Float.toString(allSeasonData.body().get(index).mAssists));
+        }
+
+        @Override
+        public void onItemClicked(int index) {
+           // Toast.makeText(this, "Item clicked", Toast.LENGTH_SHORT).show();
+            //ptsResult.setText(Float.toString(allSeasonData.body().get(index).mPoints));
+           // rebResult.setText(Float.toString(allSeasonData.body().get(index).mTotalRebounds));
+          //  astResult.setText(Float.toString(allSeasonData.body().get(index).mAssists));
+        }
+    }
+
 
 }

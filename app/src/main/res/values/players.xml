@@ -84,7 +84,6 @@
         <item>denzel/valentine,1627756</item>
         <item>dwyane/wade,2548</item>
         <item>paul/zipser,1627835</item>
-        <item></item>
     </array>
     <array name="Cavaliers">
         <item>Chris Andersen,2365</item>
@@ -508,8 +507,8 @@
         <item>kelly/oubre,1626162</item>
         <item>otto/porter,203490</item>
         <item>tomas/satoransky,203107</item>
-        <item>jason/smith/201160</item>
-        <item>marcus/thornton/201977</item>
+        <item>jason/smith,201160</item>
+        <item>marcus/thornton,201977</item>
         <item>john/wall,202322</item>
     </array>
 </resources>
