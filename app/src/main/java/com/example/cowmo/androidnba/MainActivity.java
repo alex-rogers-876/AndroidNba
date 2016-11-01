@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity{
     private RecyclerView recycler;
     private HorizontalPicker picker;
     public Button button;
-   public MyButton myButton;
+
     public ImageView image;
     public Intent menuIntent;
     private Intent myIntent;
