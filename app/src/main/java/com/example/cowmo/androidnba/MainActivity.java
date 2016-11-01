@@ -13,12 +13,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 import com.wefika.horizontalpicker.HorizontalPicker;
 import com.wefika.horizontalpicker.HorizontalPicker.OnItemClicked;
 import com.wefika.horizontalpicker.HorizontalPicker.OnItemSelected;
@@ -33,6 +36,7 @@ import Rest.NbaResults;
 import retrofit2.Call;
 import retrofit2.Response;
 
+
 public class MainActivity extends AppCompatActivity{
     private NumberPicker mNumberpicker;
     public String[] playerName,stringSeasons;
@@ -43,6 +47,12 @@ public class MainActivity extends AppCompatActivity{
     private Spinner spinnerTeams, spinnerPlayers, spinnerSeasons;
     private RecyclerView recycler;
     private HorizontalPicker picker;
+    public Button button;
+   public MyButton myButton;
+    public ImageView image;
+    public Intent menuIntent;
+    private Intent myIntent;
+    ArrayAdapter<String> playerAdaptor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +60,16 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-
+        menuIntent = new Intent(this, MenuActivity.class);
+       // image= (ImageView) findViewById(R.id.imageView);
+          button = (Button) findViewById(R.id.teamButton);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                //setContentView(R.layout.team_menu_test);
+                startActivity(menuIntent);
+                //loadImage();
+            }
+        });
     }
 
     @Override
@@ -62,8 +81,132 @@ public class MainActivity extends AppCompatActivity{
         astResult = (TextView)findViewById(R.id.astMainResult);
         spinnerTeams = (Spinner) findViewById(R.id.spinner);
         spinnerPlayers = (Spinner)findViewById(R.id.spinnerPlayers);
-      //  spinnerSeasons = (Spinner)findViewById(R.id.spinnerYear);
+
+        myIntent = getIntent(); // gets the previously created intent
+        String[] team = null;
+        boolean haveMatched = true;
+        String teamName = myIntent.getStringExtra("teamName"); // will return "FirstKeyValue"
+        switch (teamName) {
+            case "Hawks":
+                team = getResources().getStringArray(R.array.Hawks);
+                break;
+            case "Pistons":
+                team = getResources().getStringArray(R.array.Pistons);
+                break;
+            case "Pacers":
+                team = getResources().getStringArray(R.array.Pacers);
+                break;
+            case "Magic":
+                team = getResources().getStringArray(R.array.Magic);
+                break;
+            case "Suns":
+                team = getResources().getStringArray(R.array.Suns);
+                break;
+            case "Kings":
+                team = getResources().getStringArray(R.array.Kings);
+                break;
+            case "Raptors":
+                team = getResources().getStringArray(R.array.Raptors);
+                break;
+            case "Jazz":
+                team = getResources().getStringArray(R.array.Jazz);
+                break;
+            case "Wizards":
+                team = getResources().getStringArray(R.array.Wizards);
+                break;
+            case "Grizzlies":
+                team = getResources().getStringArray(R.array.Grizzlies);
+                break;
+            case "Nets":
+                team = getResources().getStringArray(R.array.Nets);
+                break;
+            case "Rockets":
+                team = getResources().getStringArray(R.array.Rockets);
+                break;
+            case "Cavaliers":
+                team = getResources().getStringArray(R.array.Cavaliers);
+                break;
+            case "Celtics":
+                team = getResources().getStringArray(R.array.Celtics);
+                break;
+            case "Hornets":
+                team = getResources().getStringArray(R.array.Hornets);
+                break;
+            case "Bucks":
+                team = getResources().getStringArray(R.array.Bucks);
+                break;
+            case "Bulls":
+                team = getResources().getStringArray(R.array.Bulls);
+                break;
+            case "Heat":
+                team = getResources().getStringArray(R.array.Heat);
+                break;
+            case "Mavericks":
+                team = getResources().getStringArray(R.array.Mavericks);
+                break;
+            case "Nuggers":
+                team = getResources().getStringArray(R.array.Nuggets);
+                break;
+            case "Timberwolves":
+                team = getResources().getStringArray(R.array.Timberwolves);
+                break;
+            case "76ers":
+                team = getResources().getStringArray(R.array.p76ers);
+                break;
+            case "Warriors":
+                team = getResources().getStringArray(R.array.Warriors);
+                break;
+            case "Clippers":
+                team = getResources().getStringArray(R.array.Clippers);
+                break;
+            case "Lakers":
+                team = getResources().getStringArray(R.array.Lakers);
+                break;
+            case "Knicks":
+                team = getResources().getStringArray(R.array.Knicks);
+                break;
+            case "Thunder":
+                team = getResources().getStringArray(R.array.Thunder);
+                break;
+            case "Blazers":
+                team = getResources().getStringArray(R.array.Blazers);
+                break;
+            case "Spurs":
+                team = getResources().getStringArray(R.array.Spurs);
+                break;
+            case "Pelicans":
+                team = getResources().getStringArray(R.array.Pelicans);
+                break;
+            default:
+                haveMatched = false;
+        }
+
+
+    if (haveMatched) {
+        separatePlayerNameAndId(team);
+        playerAdaptor = setPlayerSpinner(playerName);
+        spinnerPlayers.setAdapter(playerAdaptor);
+        // mAsync.setSpinnerPlayers(spinnerPlayers);
+        spinnerPlayers.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                try {
+                    new MyAsyncTask().execute(playerId[position]);
+                } catch (Exception ex) {
+                    Log.i("1", ex.getMessage());
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+        //tv1.setText(splitTeam[1]);
+    }
+
+
+        //  spinnerSeasons = (Spinner)findViewById(R.id.spinnerYear);
        // mNumberpicker = (NumberPicker)findViewById(R.id.numberPicker);
+        /*
         adapter = ArrayAdapter.createFromResource(
                 this, R.array.Teams, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -204,7 +347,7 @@ public class MainActivity extends AppCompatActivity{
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
+        });*/
 
     super.onStart();
     }

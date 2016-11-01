@@ -51,4 +51,13 @@
         android:layout_below="@+id/spinnerPlayers"
         android:layout_alignParentEnd="true" />
 
+    <Button
+        android:text="Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/textView2"
+        android:layout_marginBottom="90dp"
+        android:id="@+id/teamButton" />
+
 </RelativeLayout>
