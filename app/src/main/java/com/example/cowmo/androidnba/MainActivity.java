@@ -191,7 +191,7 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 try {
-                    new MyAsyncTask().execute(playerId[position]);
+                //    new MyAsyncTask().execute(playerId[position]);
                 } catch (Exception ex) {
                     Log.i("1", ex.getMessage());
                 }
@@ -407,7 +407,7 @@ public class MainActivity extends AppCompatActivity{
     public void failMessage(){
        // Toast.makeText(MainActivity.this, "You failed moron", Toast.LENGTH_LONG).show();
     }
-
+/*
     private class MyAsyncTask extends AsyncTask<Integer, Void,Response<List<NbaResults>>>  {
 
         ApiClient apiy = new ApiClient();
@@ -492,7 +492,7 @@ public class MainActivity extends AppCompatActivity{
                         public void onNothingSelected(AdapterView<?> parent) {
 
                         }
-                    });*/
+                    });
             }
             catch (Exception ex){
                 Log.v("1", ex.getMessage());
@@ -532,7 +532,7 @@ public class MainActivity extends AppCompatActivity{
            // rebResult.setText(Float.toString(allSeasonData.body().get(index).mTotalRebounds));
           //  astResult.setText(Float.toString(allSeasonData.body().get(index).mAssists));
         }
-    }
+    }*/
 
 
 }

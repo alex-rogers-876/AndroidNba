@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ public class MenuActivity extends Activity {
     pacersImageView, clippersImageView, lakersImageView, grizzImageView, heatImageView, buckImageView,
     timberwolvesImageView, pelicansImageView, knicksImageView, thunderImageView, magicImageView, p76ersImageView,
     sunsImageView, blazersImageView, kingsImageView, spursImageView, raptorsImageView, jazzImageView, wizardsImageView;
+    public ImageButton testy;
     private Picasso picasso;
     private OkHttpClient okHttpClient;
     private Intent statsIntent;
@@ -33,7 +35,7 @@ public class MenuActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.team_menu_test);
-        statsIntent = new Intent(this, MainActivity.class);
+        statsIntent = new Intent(this, PlayerMenuActivity.class);
 
         initializeImageViews();
         okHttpClient = new OkHttpClient();
@@ -92,6 +94,7 @@ public class MenuActivity extends Activity {
         raptorsImageView = (ImageView) findViewById(R.id.raptorsImageView);
         jazzImageView = (ImageView) findViewById(R.id.jazzImageView);
         wizardsImageView = (ImageView) findViewById(R.id.wizardsImageView);
+
     }
     public void loadAllImages(){
         loadImage("http://content.sportslogos.net/logos/6/220/thumbs/22091682016.gif", hawksImageView);

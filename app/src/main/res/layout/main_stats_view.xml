@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:picker="http://schemas.android.com/apk/res-auto">
 
     <TextView
         android:text="REB"
@@ -50,18 +52,6 @@
         android:layout_centerVertical="true" />
 
     <TextView
-        android:text="PTS"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:id="@+id/pointsViewMain"
-        android:layout_marginStart="58dp"
-        android:textSize="30sp"
-        android:layout_marginTop="204dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
         android:text="0.0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -71,4 +61,30 @@
         android:layout_marginTop="29dp"
         android:layout_below="@+id/pointsViewMain"
         android:layout_alignEnd="@+id/pointsViewMain" />
+
+    <TextView
+        android:text="PTS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:id="@+id/pointsViewMain"
+        android:layout_marginStart="58dp"
+        android:textSize="30sp"
+        android:layout_marginTop="78dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <com.wefika.horizontalpicker.HorizontalPicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/picker"
+        android:textColor="#000000"
+        android:textSize="22sp"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="-1"
+
+        picker:dividerSize="@dimen/activity_vertical_margin"
+        picker:sideItems="@integer/numSideItems"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>
