@@ -12,15 +12,6 @@
             android:layout_width="106dp"
             android:layout_height="89dp"
             app:srcCompat="@android:drawable/alert_dark_frame"
-            android:id="@+id/timberwolvesImageView"
-            android:layout_row="5"
-            android:layout_column="2"
-            style="@style/buttonStyle" />
-
-        <ImageView
-            android:layout_width="106dp"
-            android:layout_height="89dp"
-            app:srcCompat="@android:drawable/alert_dark_frame"
             android:id="@+id/bucksImageView"
             android:layout_row="5"
             android:layout_column="1"
@@ -42,15 +33,6 @@
             android:id="@+id/hawksImageView"
             android:layout_row="0"
             android:layout_column="0"
-            style="@style/buttonStyle" />
-
-        <ImageView
-            android:layout_width="106dp"
-            android:layout_height="89dp"
-            app:srcCompat="@android:drawable/alert_dark_frame"
-            android:id="@+id/celticsImageView"
-            android:layout_row="0"
-            android:layout_column="1"
             style="@style/buttonStyle" />
 
         <ImageView
@@ -278,6 +260,27 @@
             android:id="@+id/lakersImageView"
             android:layout_row="4"
             android:layout_column="1"
+            style="@style/buttonStyle" />
+
+        <ImageView
+            android:layout_width="106dp"
+            android:layout_height="89dp"
+            app:srcCompat="@android:drawable/alert_dark_frame"
+            android:id="@+id/celticsImageView"
+            android:layout_row="0"
+            android:layout_column="1"
+            style="@style/buttonStyle" />
+
+        <com.pkmmte.view.CircularImageView
+            android:layout_width="106dp"
+            android:layout_height="89dp"
+            android:id="@+id/timberwolvesImageView"
+            android:layout_row="5"
+            android:layout_column="2"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
             style="@style/buttonStyle" />
 
 

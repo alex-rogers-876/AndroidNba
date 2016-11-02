@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.pkmmte.view.CircularImageView;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.OkHttpDownloader;
@@ -29,6 +30,7 @@ public class MenuActivity extends Activity {
     private Picasso picasso;
     private OkHttpClient okHttpClient;
     private Intent statsIntent;
+    CircularImageView circleImageTest;
 
 
     @Override
@@ -62,6 +64,14 @@ public class MenuActivity extends Activity {
                 //  .error(R.drawable.placeholder)
                 .into(image);
     }
+    public void loadImage(String url, CircularImageView image) {
+        Picasso.with(MenuActivity.this)
+                .load(url)
+                .fit()
+                //  .placeholder(R.drawable.placeholder)
+                //  .error(R.drawable.placeholder)
+                .into(image);
+    }
 
     public void initializeImageViews(){
         hawksImageView= (ImageView) findViewById(R.id.hawksImageView);
@@ -81,7 +91,8 @@ public class MenuActivity extends Activity {
         grizzImageView = (ImageView) findViewById(R.id.grizzImageView);
         heatImageView = (ImageView) findViewById(R.id.heatImageView);
         buckImageView = (ImageView) findViewById(R.id.bucksImageView);
-        timberwolvesImageView = (ImageView) findViewById(R.id.timberwolvesImageView);
+     //   timberwolvesImageView = () findViewById(R.id.timberwolvesImageView);
+         circleImageTest = (CircularImageView)findViewById(R.id.timberwolvesImageView);
         pelicansImageView = (ImageView) findViewById(R.id.pelicansImageView);
         knicksImageView = (ImageView) findViewById(R.id.knicksImageView);
         thunderImageView = (ImageView) findViewById(R.id.thunderImageView);
@@ -115,7 +126,7 @@ public class MenuActivity extends Activity {
         loadImage("http://content.sportslogos.net/logos/6/231/thumbs/793.gif",grizzImageView);
         loadImage("http://content.sportslogos.net/logos/6/214/thumbs/burm5gh2wvjti3xhei5h16k8e.gif",heatImageView);
         loadImage("http://content.sportslogos.net/logos/6/225/thumbs/22582752016.gif",buckImageView);
-        loadImage("http://content.sportslogos.net/logos/6/232/thumbs/zq8qkfni1g087f4245egc32po.gif",timberwolvesImageView);
+        loadImage("http://content.sportslogos.net/logos/6/232/thumbs/zq8qkfni1g087f4245egc32po.gif",circleImageTest);
         loadImage("http://content.sportslogos.net/logos/6/4962/thumbs/496226812014.gif",pelicansImageView);
         loadImage("http://content.sportslogos.net/logos/6/216/thumbs/2nn48xofg0hms8k326cqdmuis.gif",knicksImageView);
         loadImage("http://content.sportslogos.net/logos/6/2687/thumbs/khmovcnezy06c3nm05ccn0oj2.gif",thunderImageView);
@@ -245,7 +256,15 @@ public class MenuActivity extends Activity {
                 startActivity(statsIntent);
             }
         });
+        /*
         timberwolvesImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                statsIntent.putExtra("teamName","Timberwolves");
+                startActivity(statsIntent);
+            }
+        });*/
+        circleImageTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 statsIntent.putExtra("teamName","Timberwolves");
