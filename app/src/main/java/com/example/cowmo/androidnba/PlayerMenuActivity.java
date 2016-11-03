@@ -1,46 +1,58 @@
 package com.example.cowmo.androidnba;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
+import com.pkmmte.view.CircularImageView;
 import com.squareup.picasso.Picasso;
+
+import java.util.List;
+
+import Rest.ApiClient;
+import Rest.NbaResults;
+import retrofit2.Call;
+import retrofit2.Response;
 
 /**
  * Created by cowmo on 11/1/2016.
  */
 
 public class PlayerMenuActivity extends Activity {
-    public ImageView player1ImageView,player2ImageView,player3ImageView,player4ImageView,player5ImageView,player6ImageView,player7ImageView
+    public CircularImageView player1ImageView,player2ImageView,player3ImageView,player4ImageView,player5ImageView,player6ImageView,player7ImageView
             ,player8ImageView,player9ImageView,player10ImageView,player11ImageView,player12ImageView,player13ImageView,player14ImageView, player15ImageView;
     private Intent myIntent, statsIntent;
     public String[] playerName,stringSeasons;
     public int[] playerId;
+    private boolean haveMatched = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.player_menu);
         statsIntent = new Intent(this, StatsActivity.class);
-        player1ImageView = (ImageView)findViewById(R.id.player1ImageView);
-        player2ImageView = (ImageView)findViewById(R.id.player2ImageView);
-        player3ImageView = (ImageView)findViewById(R.id.player3ImageView);
-        player4ImageView = (ImageView)findViewById(R.id.player4ImageView);
-        player5ImageView = (ImageView)findViewById(R.id.player5ImageView);
-        player6ImageView = (ImageView)findViewById(R.id.player6ImageView);
-        player7ImageView = (ImageView)findViewById(R.id.player7ImageView);
-        player8ImageView = (ImageView)findViewById(R.id.player8ImageView);
-        player9ImageView = (ImageView)findViewById(R.id.player9ImageView);
-        player10ImageView = (ImageView)findViewById(R.id.player10ImageView);
-        player11ImageView = (ImageView)findViewById(R.id.player11ImageView);
-        player12ImageView = (ImageView)findViewById(R.id.player12ImageView);
-        player13ImageView = (ImageView)findViewById(R.id.player13ImageView);
-        player14ImageView = (ImageView)findViewById(R.id.player14ImageView);
-        player15ImageView = (ImageView)findViewById(R.id.player15ImageView);
+        player1ImageView = (CircularImageView)findViewById(R.id.player1ImageView);
+        player2ImageView = (CircularImageView)findViewById(R.id.player2ImageView);
+        player3ImageView = (CircularImageView)findViewById(R.id.player3ImageView);
+        player4ImageView = (CircularImageView)findViewById(R.id.player4ImageView);
+        player5ImageView = (CircularImageView)findViewById(R.id.player5ImageView);
+        player6ImageView = (CircularImageView)findViewById(R.id.player6ImageView);
+        player7ImageView = (CircularImageView)findViewById(R.id.player7ImageView);
+        player8ImageView = (CircularImageView)findViewById(R.id.player8ImageView);
+        player9ImageView = (CircularImageView)findViewById(R.id.player9ImageView);
+        player10ImageView = (CircularImageView)findViewById(R.id.player10ImageView);
+        player11ImageView = (CircularImageView)findViewById(R.id.player11ImageView);
+        player12ImageView = (CircularImageView)findViewById(R.id.player12ImageView);
+        player13ImageView = (CircularImageView)findViewById(R.id.player13ImageView);
+        player14ImageView = (CircularImageView)findViewById(R.id.player14ImageView);
+        player15ImageView = (CircularImageView)findViewById(R.id.player15ImageView);
 
         player1ImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,7 +167,7 @@ public class PlayerMenuActivity extends Activity {
 
         myIntent = getIntent(); // gets the previously created intent
         String[] team = null;
-        boolean haveMatched = true;
+
         String teamName = myIntent.getStringExtra("teamName"); // will return "FirstKeyValue"
         switch (teamName) {
             case "Hawks":
@@ -318,12 +330,22 @@ public class PlayerMenuActivity extends Activity {
         }
 
     }
-    public void loadImage(String url, ImageView image) {
-        Picasso.with(PlayerMenuActivity.this)
-                .load("https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/" + url + ".png")
-                .fit()
-                //  .placeholder(R.drawable.placeholder)
-                //  .error(R.drawable.placeholder)
-                .into(image);
+    public void loadImage(String url, CircularImageView image) {
+        try {
+
+
+            Picasso.with(PlayerMenuActivity.this)
+                    .load("https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/" + url + ".png")
+                    .placeholder(R.drawable.progress_animation)
+                    .fit()
+
+                    //  .placeholder(R.drawable.placeholder)
+                    //  .error(R.drawable.placeholder)
+                    .into(image);
+        }
+        catch (Exception ex){
+            Log.i("1", ex.getMessage());
+        }
     }
+
 }

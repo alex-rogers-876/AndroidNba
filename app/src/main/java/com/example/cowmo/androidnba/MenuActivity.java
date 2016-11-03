@@ -3,6 +3,7 @@ package com.example.cowmo.androidnba;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -21,7 +22,7 @@ import com.squareup.picasso.Picasso;
  */
 
 public class MenuActivity extends Activity {
-    public  ImageView hawksImageView, celticsImageView, netsImageView, hornetsImageView, bullsImageView,
+    public  CircularImageView hawksImageView, celticsImageView, netsImageView, hornetsImageView, bullsImageView,
             cavsImageView, mavsImageView, nuggetsImageView,pistonsImageView, warriorsImageView, rocketsImageView,
     pacersImageView, clippersImageView, lakersImageView, grizzImageView, heatImageView, buckImageView,
     timberwolvesImageView, pelicansImageView, knicksImageView, thunderImageView, magicImageView, p76ersImageView,
@@ -67,44 +68,46 @@ public class MenuActivity extends Activity {
     public void loadImage(String url, CircularImageView image) {
         Picasso.with(MenuActivity.this)
                 .load(url)
-                .fit()
+                .placeholder(R.drawable.progress_animation)
+                .transform(new CircleTransform()).fit().into(image);
+               // .fit()
                 //  .placeholder(R.drawable.placeholder)
                 //  .error(R.drawable.placeholder)
-                .into(image);
+             //   .into(image);
     }
 
     public void initializeImageViews(){
-        hawksImageView= (ImageView) findViewById(R.id.hawksImageView);
-        celticsImageView = (ImageView) findViewById(R.id.celticsImageView);
-        netsImageView = (ImageView) findViewById(R.id.netsImageView);
-        hornetsImageView = (ImageView) findViewById(R.id.hornetsImageView);
-        bullsImageView = (ImageView) findViewById(R.id.bullsImageView);
-        cavsImageView = (ImageView) findViewById(R.id.cavsImageView);
-        mavsImageView = (ImageView) findViewById(R.id.mavsImageView);
-        nuggetsImageView = (ImageView) findViewById(R.id.nuggetsImageView);
-        pistonsImageView = (ImageView) findViewById(R.id.pistonsImageView);
-        warriorsImageView = (ImageView) findViewById(R.id.warriorsImageView);
-        rocketsImageView = (ImageView) findViewById(R.id.rocketsImageView);
-        pacersImageView = (ImageView) findViewById(R.id.pacersImageView);
-        clippersImageView = (ImageView) findViewById(R.id.clippersImageView);
-        lakersImageView = (ImageView) findViewById(R.id.lakersImageView);
-        grizzImageView = (ImageView) findViewById(R.id.grizzImageView);
-        heatImageView = (ImageView) findViewById(R.id.heatImageView);
-        buckImageView = (ImageView) findViewById(R.id.bucksImageView);
+        hawksImageView= (CircularImageView) findViewById(R.id.hawksImageView);
+        celticsImageView = (CircularImageView) findViewById(R.id.celticsImageView);
+        netsImageView = (CircularImageView) findViewById(R.id.netsImageView);
+        hornetsImageView = (CircularImageView) findViewById(R.id.hornetsImageView);
+        bullsImageView = (CircularImageView) findViewById(R.id.bullsImageView);
+        cavsImageView = (CircularImageView) findViewById(R.id.cavsImageView);
+        mavsImageView = (CircularImageView) findViewById(R.id.mavsImageView);
+        nuggetsImageView = (CircularImageView) findViewById(R.id.nuggetsImageView);
+        pistonsImageView = (CircularImageView) findViewById(R.id.pistonsImageView);
+        warriorsImageView = (CircularImageView) findViewById(R.id.warriorsImageView);
+        rocketsImageView = (CircularImageView) findViewById(R.id.rocketsImageView);
+        pacersImageView = (CircularImageView) findViewById(R.id.pacersImageView);
+        clippersImageView = (CircularImageView) findViewById(R.id.clippersImageView);
+        lakersImageView = (CircularImageView) findViewById(R.id.lakersImageView);
+        grizzImageView = (CircularImageView) findViewById(R.id.grizzImageView);
+        heatImageView = (CircularImageView) findViewById(R.id.heatImageView);
+        buckImageView = (CircularImageView) findViewById(R.id.bucksImageView);
      //   timberwolvesImageView = () findViewById(R.id.timberwolvesImageView);
          circleImageTest = (CircularImageView)findViewById(R.id.timberwolvesImageView);
-        pelicansImageView = (ImageView) findViewById(R.id.pelicansImageView);
-        knicksImageView = (ImageView) findViewById(R.id.knicksImageView);
-        thunderImageView = (ImageView) findViewById(R.id.thunderImageView);
-        magicImageView = (ImageView) findViewById(R.id.magicImageView);
-        p76ersImageView = (ImageView) findViewById(R.id.p76ersImageView);
-        sunsImageView = (ImageView) findViewById(R.id.sunsImageView);
-        blazersImageView = (ImageView) findViewById(R.id.blazersImageView);
-        kingsImageView = (ImageView) findViewById(R.id.kingsImageView);
-        spursImageView = (ImageView) findViewById(R.id.spursImageView);
-        raptorsImageView = (ImageView) findViewById(R.id.raptorsImageView);
-        jazzImageView = (ImageView) findViewById(R.id.jazzImageView);
-        wizardsImageView = (ImageView) findViewById(R.id.wizardsImageView);
+        pelicansImageView = (CircularImageView) findViewById(R.id.pelicansImageView);
+        knicksImageView = (CircularImageView) findViewById(R.id.knicksImageView);
+        thunderImageView = (CircularImageView) findViewById(R.id.thunderImageView);
+        magicImageView = (CircularImageView) findViewById(R.id.magicImageView);
+        p76ersImageView = (CircularImageView) findViewById(R.id.p76ersImageView);
+        sunsImageView = (CircularImageView) findViewById(R.id.sunsImageView);
+        blazersImageView = (CircularImageView) findViewById(R.id.blazersImageView);
+        kingsImageView = (CircularImageView) findViewById(R.id.kingsImageView);
+        spursImageView = (CircularImageView) findViewById(R.id.spursImageView);
+        raptorsImageView = (CircularImageView) findViewById(R.id.raptorsImageView);
+        jazzImageView = (CircularImageView) findViewById(R.id.jazzImageView);
+        wizardsImageView = (CircularImageView) findViewById(R.id.wizardsImageView);
 
     }
     public void loadAllImages(){
@@ -144,6 +147,10 @@ public class MenuActivity extends Activity {
         hawksImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+             //   hawksImageView.setBorderColor(ContextCompat.getColor(getApplicationContext(),R.color.colorAccent));
+            //    hawksImageView.setSelectorColor(ContextCompat.getColor(getApplicationContext(),R.color.colorAccent));
+            //    hawksImageView.setSelectorStrokeColor(ContextCompat.getColor(getApplicationContext(),R.color.colorAccent));
+            //    hawksImageView.setSelectorStrokeWidth(10);
                 statsIntent.putExtra("teamName","Hawks");
                 startActivity(statsIntent);
             }
