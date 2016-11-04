@@ -6,51 +6,737 @@
     android:fillViewport="true">
 
     <android.support.v7.widget.GridLayout
-        android:id="@+id/choice_grid"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:grid="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
-        android:padding="4dp"
-
         grid:alignmentMode="alignBounds"
-        grid:columnCount="2"
-        grid:rowOrderPreserved="false"
-        grid:useDefaultMargins="true">
+        grid:columnCount="3">
+        <com.pkmmte.view.CircularImageView
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="100dp"
+            app:srcCompat="@android:drawable/alert_dark_frame"
+            android:id="@+id/hawksImageView"
             grid:layout_columnWeight="1"
-            grid:layout_gravity="fill_horizontal"
-            android:gravity="center"
-            android:background="#FF33B5E5"
-            android:text="Tile1" />
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            style="@style/buttonStyle"
+            />
+        <com.pkmmte.view.CircularImageView
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="100dp"
+            app:srcCompat="@android:drawable/alert_dark_frame"
+            android:id="@+id/celticsImageView"
             grid:layout_columnWeight="1"
-            grid:layout_gravity="fill_horizontal"
-            android:gravity="center"
-            android:background="#FF33B5E5"
-            android:text="Tile2" />
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            style="@style/buttonStyle"
+            />
+        <com.pkmmte.view.CircularImageView
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="100dp"
+            app:srcCompat="@android:drawable/alert_dark_frame"
+            android:id="@+id/netsImageView"
             grid:layout_columnWeight="1"
-            grid:layout_gravity="fill_horizontal"
-            android:gravity="center"
-            android:background="#FF33B5E5"
-            android:text="Tile3" />
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            style="@style/buttonStyle"
+            />
+        <TextView
+            android:text="Atlanta Hawks"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/hawksTextView"
+            style="@style/textStyle" />
+        <TextView
+            android:text="Boston Celtics"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/celticsTextView"
+            style="@style/textStyle" />
+        <TextView
+            android:text="Brooklyn Nets"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/netsTextView"
+            style="@style/textStyle" />
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="100dp"
+        <com.pkmmte.view.CircularImageView
+
+            app:srcCompat="@android:drawable/alert_dark_frame"
+            android:id="@+id/hornetsImageView"
             grid:layout_columnWeight="1"
-            grid:layout_gravity="fill_horizontal"
-            android:gravity="center"
-            android:background="#FF33B5E5"
-            android:text="Tile4" />
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            style="@style/buttonStyle"
+            />
+        <com.pkmmte.view.CircularImageView
+
+            app:srcCompat="@android:drawable/alert_dark_frame"
+            android:id="@+id/bullsImageView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            style="@style/buttonStyle"
+            />
+        <com.pkmmte.view.CircularImageView
+
+            app:srcCompat="@android:drawable/alert_dark_frame"
+            android:id="@+id/cavsImageView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            style="@style/buttonStyle"
+            />
+        <TextView
+            android:text="Charlotte Hornets"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/hornetsTextView"
+            style="@style/textStyle" />
+        <TextView
+            android:text="Chicago Bulls"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/bullsTextView"
+            style="@style/textStyle" />
+        <TextView
+            android:text="Cleveland Cavaliers"
+
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/cavsTextView"
+            style="@style/textStyle" />
+        <com.pkmmte.view.CircularImageView
+
+            app:srcCompat="@android:drawable/alert_dark_frame"
+            android:id="@+id/mavsImageView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            style="@style/buttonStyle"
+            />
+        <com.pkmmte.view.CircularImageView
+
+            app:srcCompat="@android:drawable/alert_dark_frame"
+            android:id="@+id/nuggetsImageView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            style="@style/buttonStyle"
+            />
+        <com.pkmmte.view.CircularImageView
+
+            app:srcCompat="@android:drawable/alert_dark_frame"
+            android:id="@+id/pistonsImageView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            style="@style/buttonStyle"
+            />
+        <TextView
+            android:text="Dallas Mavericks"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/mavsTextView"
+            style="@style/textStyle" />
+        <TextView
+            android:text="Denver Nuggets"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/nuggetsTextView"
+            style="@style/textStyle" />
+        <TextView
+            android:text="Detroit Pistons"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/pistonsTextView"
+            style="@style/textStyle" />
+
+        <com.pkmmte.view.CircularImageView
+
+            app:srcCompat="@android:drawable/alert_dark_frame"
+            android:id="@+id/warriorsImageView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            style="@style/buttonStyle"
+            />
+        <com.pkmmte.view.CircularImageView
+
+            app:srcCompat="@android:drawable/alert_dark_frame"
+            android:id="@+id/rocketsImageView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            style="@style/buttonStyle"
+            />
+        <com.pkmmte.view.CircularImageView
+
+            app:srcCompat="@android:drawable/alert_dark_frame"
+            android:id="@+id/pacersImageView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            style="@style/buttonStyle"
+            />
+        <TextView
+            android:text="Golden State Warriors"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/warriorsTextView"
+            style="@style/textStyle"
+            />
+        <TextView
+            android:text="Houston Rockets"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/rocketsTextView"
+            style="@style/textStyle" />
+        <TextView
+            android:text="Indiana Pacers"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/pacersTextView"
+            style="@style/textStyle" />
+        <com.pkmmte.view.CircularImageView
+
+            app:srcCompat="@android:drawable/alert_dark_frame"
+            android:id="@+id/clippersImageView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            style="@style/buttonStyle"
+            />
+        <com.pkmmte.view.CircularImageView
+
+            app:srcCompat="@android:drawable/alert_dark_frame"
+            android:id="@+id/lakersImageView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            style="@style/buttonStyle"
+            />
+        <com.pkmmte.view.CircularImageView
+
+            app:srcCompat="@android:drawable/alert_dark_frame"
+            android:id="@+id/grizzImageView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            style="@style/buttonStyle"
+            />
+        <TextView
+            android:text="LA Clippers"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/clippersTextView"
+            style="@style/textStyle" />
+        <TextView
+            android:text="LA Lakers"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/lakersTextView"
+            style="@style/textStyle" />
+        <TextView
+            android:text="Memphis Grizzlies"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/grizzTextView"
+            style="@style/textStyle" />
+
+        <com.pkmmte.view.CircularImageView
+
+            app:srcCompat="@android:drawable/alert_dark_frame"
+            android:id="@+id/heatImageView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            style="@style/buttonStyle"
+            />
+        <com.pkmmte.view.CircularImageView
+
+            app:srcCompat="@android:drawable/alert_dark_frame"
+            android:id="@+id/bucksImageView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            style="@style/buttonStyle"
+            />
+        <com.pkmmte.view.CircularImageView
+
+        app:srcCompat="@android:drawable/alert_dark_frame"
+        android:id="@+id/timberwolvesImageView"
+        grid:layout_columnWeight="1"
+        grid:layout_rowWeight="1"
+        grid:layout_gravity="fill"
+        app:border="true"
+        app:border_color="#EEEEEE"
+        app:border_width="4dp"
+        app:shadow="true"
+        style="@style/buttonStyle"
+        />
+        <TextView
+            android:text="Miami Heat"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/heatTextView"
+            style="@style/textStyle" />
+        <TextView
+            android:text="Milwaukee Bucks"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/bucksTextView"
+            style="@style/textStyle" />
+        <TextView
+            android:text="Minnesota Timberwolves"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/timberwolvesTextView"
+            style="@style/textStyle" />
+        <com.pkmmte.view.CircularImageView
+
+        app:srcCompat="@android:drawable/alert_dark_frame"
+        android:id="@+id/pelicansImageView"
+        grid:layout_columnWeight="1"
+        grid:layout_rowWeight="1"
+        grid:layout_gravity="fill"
+        app:border="true"
+        app:border_color="#EEEEEE"
+        app:border_width="4dp"
+        app:shadow="true"
+        style="@style/buttonStyle"
+        /><com.pkmmte.view.CircularImageView
+
+        app:srcCompat="@android:drawable/alert_dark_frame"
+        android:id="@+id/knicksImageView"
+        grid:layout_columnWeight="1"
+        grid:layout_rowWeight="1"
+        grid:layout_gravity="fill"
+        app:border="true"
+        app:border_color="#EEEEEE"
+        app:border_width="4dp"
+        app:shadow="true"
+        style="@style/buttonStyle"
+        />
+        <com.pkmmte.view.CircularImageView
+
+            app:srcCompat="@android:drawable/alert_dark_frame"
+            android:id="@+id/thunderImageView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            style="@style/buttonStyle"
+            />
+        <TextView
+            android:text="New Orleans Pelicans"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/pelicansTextView"
+            style="@style/textStyle" />
+        <TextView
+            android:text="New York Knicks"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/knicksTextView"
+            style="@style/textStyle" />
+        <TextView
+            android:text="OKC Thunder"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/thunderTextView"
+            style="@style/textStyle" />
+        <com.pkmmte.view.CircularImageView
+
+        app:srcCompat="@android:drawable/alert_dark_frame"
+        android:id="@+id/magicImageView"
+        grid:layout_columnWeight="1"
+        grid:layout_rowWeight="1"
+        grid:layout_gravity="fill"
+        app:border="true"
+        app:border_color="#EEEEEE"
+        app:border_width="4dp"
+        app:shadow="true"
+        style="@style/buttonStyle"
+        />
+        <com.pkmmte.view.CircularImageView
+
+            app:srcCompat="@android:drawable/alert_dark_frame"
+            android:id="@+id/p76ersImageView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            style="@style/buttonStyle"
+            /><com.pkmmte.view.CircularImageView
+
+        app:srcCompat="@android:drawable/alert_dark_frame"
+        android:id="@+id/sunsImageView"
+        grid:layout_columnWeight="1"
+        grid:layout_rowWeight="1"
+        grid:layout_gravity="fill"
+        app:border="true"
+        app:border_color="#EEEEEE"
+        app:border_width="4dp"
+        app:shadow="true"
+        style="@style/buttonStyle"
+        />
+        <TextView
+            android:text="Orlando Magic"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/magicTextView"
+            style="@style/textStyle" />
+        <TextView
+            android:text="Philadelphia 76ers"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/p76ersTextView"
+            style="@style/textStyle" />
+        <TextView
+            android:text="Pheonix Suns"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/sunsTextView"
+            style="@style/textStyle" />
+        <com.pkmmte.view.CircularImageView
+
+        app:srcCompat="@android:drawable/alert_dark_frame"
+        android:id="@+id/blazersImageView"
+        grid:layout_columnWeight="1"
+        grid:layout_rowWeight="1"
+        grid:layout_gravity="fill"
+        app:border="true"
+        app:border_color="#EEEEEE"
+        app:border_width="4dp"
+        app:shadow="true"
+        style="@style/buttonStyle"
+        />
+        <com.pkmmte.view.CircularImageView
+
+            app:srcCompat="@android:drawable/alert_dark_frame"
+            android:id="@+id/kingsImageView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            style="@style/buttonStyle"
+            />
+        <com.pkmmte.view.CircularImageView
+
+            app:srcCompat="@android:drawable/alert_dark_frame"
+            android:id="@+id/spursImageView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            style="@style/buttonStyle"
+            />
+        <TextView
+            android:text="Portland Trailblazers"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/blazersTextView"
+            style="@style/textStyle" />
+        <TextView
+            android:text="Sacremento Kings"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/kingsTextView"
+            style="@style/textStyle" />
+        <TextView
+            android:text="San Antonio Spurs"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/spursTextView"
+            style="@style/textStyle" />
+        <com.pkmmte.view.CircularImageView
+
+            app:srcCompat="@android:drawable/alert_dark_frame"
+            android:id="@+id/raptorsImageView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            style="@style/buttonStyle"
+            />
+        <com.pkmmte.view.CircularImageView
+
+            app:srcCompat="@android:drawable/alert_dark_frame"
+            android:id="@+id/jazzImageView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            style="@style/buttonStyle"
+            />
+
+        <com.pkmmte.view.CircularImageView
+
+            app:srcCompat="@android:drawable/alert_dark_frame"
+            android:id="@+id/wizardsImageView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            style="@style/buttonStyle"
+            />
+        <TextView
+            android:text="Toronto Raptors"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/raptorsTextView"
+            style="@style/textStyle" />
+        <TextView
+            android:text="Utah Jazz"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/jazzTextView"
+            style="@style/textStyle" />
+        <TextView
+            android:text="Washington Wizards"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/wizardsTextView"
+            style="@style/textStyle" />
+
     </android.support.v7.widget.GridLayout>
 </ScrollView>

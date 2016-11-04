@@ -6,7 +6,54 @@
     xmlns:grid="http://schemas.android.com/tools"
     android:fillViewport="true">
 
+        <android.support.v7.widget.GridLayout
+        android:id="@+id/choice_grid"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:padding="4dp"
 
+        grid:alignmentMode="alignBounds"
+        grid:columnCount="2"
+        grid:rowOrderPreserved="false"
+        grid:useDefaultMargins="true">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            grid:layout_columnWeight="1"
+            grid:layout_gravity="fill_horizontal"
+            android:gravity="center"
+            android:background="#FF33B5E5"
+            android:text="Tile1" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            grid:layout_columnWeight="1"
+            grid:layout_gravity="fill_horizontal"
+            android:gravity="center"
+            android:background="#FF33B5E5"
+            android:text="Tile2" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            grid:layout_columnWeight="1"
+            grid:layout_gravity="fill_horizontal"
+            android:gravity="center"
+            android:background="#FF33B5E5"
+            android:text="Tile3" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            grid:layout_columnWeight="1"
+            grid:layout_gravity="fill_horizontal"
+            android:gravity="center"
+            android:background="#FF33B5E5"
+            android:text="Tile4" />
+</android.support.v7.widget.GridLayout>
         <GridLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -406,5 +453,8 @@
             app:border_width="4dp"
             app:shadow="true"
             style="@style/buttonStyle" />
+
+
     </GridLayout>
+
 </ScrollView>

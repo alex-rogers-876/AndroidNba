@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/tools"
+    xmlns:grid="http://schemas.android.com/apk/res-auto">
+    <com.wefika.horizontalpicker.HorizontalPicker
+        xmlns:picker="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/picker"
+        android:textColor="#000000"
+        android:textSize="22sp"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="-1"
+
+        picker:dividerSize="@dimen/activity_vertical_margin"
+        picker:sideItems="@integer/numSideItems"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+    <android.support.v7.widget.GridLayout
+        android:id="@+id/mainStats"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:grid="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/picker"
+        grid:columnCount="3">
+
+        <TextView
+            android:text="PTS"
+            android:textSize="36sp"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/TextViewy"
+            style="@style/mainStatsStyle" />
+        <TextView
+            android:text="REB"
+            android:textSize="36sp"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/TextViewyy"
+            style="@style/mainStatsStyle" />
+        <TextView
+            android:text="AST"
+            android:textSize="36sp"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/TextViewyyy"
+            style="@style/mainStatsStyle" />
+        <TextView
+            android:text="0.0"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/ptsTextView"
+            style="@style/mainStatsStyle" />
+        <TextView
+            android:text="0.0"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/rebTextView"
+            style="@style/mainStatsStyle" />
+        <TextView
+            android:text="0.0"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/astTextView"
+            style="@style/mainStatsStyle" />
+        </android.support.v7.widget.GridLayout>
+
+
+    <android.support.v7.widget.GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mainStats"
+        android:layout_centerHorizontal="true"
+
+        grid:columnCount="2">
+        <TextView
+            android:text="FG Made:"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/fgmTextView"
+            style="@style/secondaryStatsStyle" />
+        <TextView
+            android:text="FG 3's Made:"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/fga3TextView"
+            style="@style/secondaryStatsStyle" />
+        <TextView
+            android:text="FG Attempted:"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/fgaTextView"
+            style="@style/secondaryStatsStyle" />
+        <TextView
+            android:text="FG 3's Attempted"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/fgm3TextView"
+            style="@style/secondaryStatsStyle" />
+        <TextView
+            android:text="FG Percentage:"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/fgpTextView"
+            style="@style/secondaryStatsStyle" />
+        <TextView
+            android:text="FG 3's Percentage:"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/fg3pTextView"
+            style="@style/secondaryStatsStyle" />
+        <TextView
+            android:text="Free Throws Made:"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/ftmTextView"
+            style="@style/secondaryStatsStyle" />
+        <TextView
+            android:text="Defensive Rebounds:"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/drebTextView"
+            style="@style/secondaryStatsStyle" />
+        <TextView
+            android:text="Free Throws Attempted:"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/ftaTextView"
+            style="@style/secondaryStatsStyle" />
+        <TextView
+            android:text="Offensive Rebounds"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/orebTextView"
+            style="@style/secondaryStatsStyle" />
+        <TextView
+            android:text="Free Throws Percentage:"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/ftpTextView"
+            style="@style/secondaryStatsStyle" />
+        <TextView
+            android:text="Total Rebounds"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/totRebTextView"
+            style="@style/secondaryStatsStyle" />
+        <TextView
+            android:text="Assists:"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/astSmallTextView"
+            style="@style/secondaryStatsStyle" />
+        <TextView
+            android:text="Blocks:"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/blkTextView"
+            style="@style/secondaryStatsStyle" />
+        <TextView
+            android:text="Turnovers:"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/toTextView"
+            style="@style/secondaryStatsStyle" />
+        <TextView
+            android:text="Personal Fouls:"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/pfTextView"
+            style="@style/secondaryStatsStyle" />
+        <TextView
+            android:text="Points:"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/ptsSmallTextView"
+            style="@style/secondaryStatsStyle" />
+    </android.support.v7.widget.GridLayout>
+
+
+</RelativeLayout>

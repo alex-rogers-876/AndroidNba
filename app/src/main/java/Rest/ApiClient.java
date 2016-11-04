@@ -9,6 +9,9 @@ import android.widget.ArrayAdapter;
 
 import com.example.cowmo.androidnba.MainActivity;
 
+import org.xml.sax.ErrorHandler;
+
+import java.io.IOError;
 import java.io.IOException;
 import java.util.List;
 
@@ -62,10 +65,6 @@ public class ApiClient extends Activity {
         }
     public void getPlayer(int playerId){
 
-
-
-
-
         Call<List<NbaResults>> call = REST_CLIENT.createStats(playerId);
 
         try{
@@ -87,37 +86,18 @@ public class ApiClient extends Activity {
                     for(int i = 0; i < response.body().size(); i++){
                         stringSeasons[i] = response.body().get(i).mSeasonId.toString();
                     }
-                   // mActivity.setSeasonSpinner(stringSeasons);
-
-                   // myIntent.putExtra("Seasons", stringSeasons);
-                  //  startActivity(myIntent);
-/*
-                    seasonAdaptor = mActivity.setPlayerSpinner(stringSeasons);
-
-                    mActivity.spinnerSeasons.setAdapter(seasonAdaptor);
-                    mActivity.spinnerSeasons.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> parent) {
-
-                        }
-                    });*/
                 }
                 catch (Exception ex){
                     Log.v("1", ex.getMessage());
                 }
 
-
-               // mActivity.showData(response);
             }
 
             @Override
-            public void onFailure(Call<List<NbaResults>> call, Throwable t) {
-                Log.i("log", "exhibits api error : " + t.getLocalizedMessage());
+            public void onFailure(Call<List<NbaResults>> call, Throwable t)  {
+               // throw new IOException(t) ;
+
+
             }
         });
     }

@@ -8,9 +8,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wefika.horizontalpicker.HorizontalPicker;
 
+import java.io.IOException;
 import java.util.List;
 
 import Rest.ApiClient;
@@ -29,17 +31,37 @@ public class StatsActivity extends Activity {
     public String[] playerName,stringSeasons;
     private HorizontalPicker picker;
     private Intent myIntent;
+    public Intent teamIntent;
     private int playerId;
-    private static TextView tv1, ptsResult, astResult, rebResult;
+    private static TextView  ptsResult, astResult, rebResult, fgMade, fgAttempted, fgPercent, ftMade, ftAttempted, ftPercent, ast, turnover,
+    ptsSecond, fg3Made, fg3Attempted, fg3Percent, defRebound, offRebound, totRebound, blocks, fouls;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_stats_view);
+        setContentView(R.layout.main_stats_view_test);
         picker = (HorizontalPicker) findViewById(R.id.picker);
-        ptsResult = (TextView)findViewById(R.id.ptsMainResult);
-        rebResult = (TextView)findViewById(R.id.rebMainResult);
-        astResult = (TextView)findViewById(R.id.astMainResult);
+        ptsResult = (TextView)findViewById(R.id.ptsTextView);
+        rebResult = (TextView)findViewById(R.id.rebTextView);
+        astResult = (TextView)findViewById(R.id.astTextView);
+        fgMade = (TextView)findViewById(R.id.fgmTextView);
+        fgAttempted = (TextView)findViewById(R.id.fgaTextView);
+        fgPercent = (TextView)findViewById(R.id.fgpTextView);
+        ftMade = (TextView)findViewById(R.id.ftmTextView);
+        ftAttempted = (TextView)findViewById(R.id.ftaTextView);
+        ftPercent = (TextView)findViewById(R.id.ftpTextView);
+        ast = (TextView)findViewById(R.id.astSmallTextView);
+        turnover = (TextView)findViewById(R.id.toTextView);
+        ptsSecond = (TextView)findViewById(R.id.ptsSmallTextView);
+        fg3Made = (TextView)findViewById(R.id.fgm3TextView);
+        fg3Attempted = (TextView)findViewById(R.id.fga3TextView);
+        fg3Percent = (TextView)findViewById(R.id.fg3pTextView);
+        defRebound = (TextView)findViewById(R.id.drebTextView);
+        offRebound = (TextView)findViewById(R.id.orebTextView);
+        totRebound = (TextView)findViewById(R.id.totRebTextView);
+        blocks = (TextView)findViewById(R.id.blkTextView);
+        fouls = (TextView)findViewById(R.id.pfTextView);
+
         myIntent = getIntent(); // gets the previously created intent
 
         playerId = myIntent.getIntExtra("playerId", 0); // will return "FirstKeyValue"
@@ -47,6 +69,7 @@ public class StatsActivity extends Activity {
             new MyAsyncTask().execute(playerId);
 
         } catch (Exception ex) {
+
             Log.i("1", ex.getMessage());
         }
     }
@@ -81,28 +104,30 @@ public class StatsActivity extends Activity {
         protected Response<List<NbaResults>>  doInBackground(Integer... params) {
             Response<List<NbaResults>> responsey = null;
             Call<List<NbaResults>> call = apiy.REST_CLIENT.createStats(params[0]);
-
+            teamIntent =  new Intent(getApplicationContext(), TeamMenuActivity.class);
 
             try{
                 responsey =  call.execute() ;
-
+                return responsey;
 
             }
-            catch (Exception ex){
-                Log.i("1", ex.getMessage());
+            catch (IOException ex){
+                progDailog.dismiss();
+               // Toast.makeText(getApplicationContext(),"OMG",Toast.LENGTH_LONG);
+
+
+                return null;
             }
-
-            return responsey;
-
-
-
             //return null;
-
         }
 
         @Override
         protected void onPostExecute(Response<List<NbaResults>>  strings) {
             super.onPostExecute(strings);
+           // playerIntent =  new Intent(getApplicationContext(), PlayerMenuActivity.class);
+            if(strings != null){
+
+
             allSeasonData = strings;
             try{
                 //Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
@@ -131,7 +156,13 @@ public class StatsActivity extends Activity {
             picker.setSelectedItem(allSeasonData.body().size());
            // picker.setSelectedItem(allSeasonData.body().size());
             // mActivity.showData(response);
+            }
+            else{
 
+                //startActivity(playerIntent);
+             //  startActivity(playerIntent);
+                startActivity(teamIntent);
+            }
 
         }
 
@@ -143,9 +174,29 @@ public class StatsActivity extends Activity {
             HorizontalPicker picker = (HorizontalPicker) findViewById(R.id.picker);
             picker.setOnItemClickedListener(this);
             picker.setOnItemSelectedListener(this);
+
             ptsResult.setText(Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mPoints));
             rebResult.setText(Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mTotalRebounds));
             astResult.setText(Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mAssists));
+            fgMade.setText("FG Made: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mAssists));
+            fgAttempted.setText("FG Attempted: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mAssists));
+            fgPercent.setText("FG Percentage: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mAssists));
+            ftMade.setText("FG Made: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mAssists));
+            ftAttempted.setText("FG Made: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mAssists));
+            ftPercent.setText("FG Made: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mAssists));
+            ast.setText("FG Made: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mAssists));
+            turnover.setText("FG Made: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mAssists));
+            ptsSecond.setText("FG Made: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mAssists));
+            fg3Made.setText("FG Made: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mAssists));
+            fg3Attempted.setText("FG Made: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mAssists));
+            fg3Percent.setText("FG Made: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mAssists));
+            defRebound.setText("FG Made: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mAssists));
+            offRebound.setText("FG Made: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mAssists));
+            totRebound.setText("FG Made: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mAssists));
+            blocks.setText("FG Made: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mAssists));
+            fouls.setText("FG Made: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mAssists));
+
+
         }
 
         @Override

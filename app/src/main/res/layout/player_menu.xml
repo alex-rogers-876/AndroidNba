@@ -1,220 +1,382 @@
-<?xml version="1.0" encoding="utf-8"?>
-
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:grid="http://schemas.android.com/tools"
     android:fillViewport="true">
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <GridLayout
 
+    <android.support.v7.widget.GridLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:grid="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
 
+        grid:columnCount="3">
         <com.pkmmte.view.CircularImageView
-            android:layout_width="120dp"
-            android:layout_height="115dp"
-             
+
             app:srcCompat="@android:drawable/alert_dark_frame"
             android:id="@+id/player1ImageView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
             app:border="true"
             app:border_color="#EEEEEE"
             app:border_width="4dp"
             app:shadow="true"
-            style="@style/buttonStyle"/>
-
-
+            style="@style/buttonStyle"
+            />
         <com.pkmmte.view.CircularImageView
-            android:layout_width="120dp"
-            android:layout_height="115dp"
-             
+
             app:srcCompat="@android:drawable/alert_dark_frame"
             android:id="@+id/player2ImageView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
             app:border="true"
             app:border_color="#EEEEEE"
             app:border_width="4dp"
             app:shadow="true"
-            style="@style/buttonStyle"/>
-
+            style="@style/buttonStyle"
+            />
         <com.pkmmte.view.CircularImageView
-            android:layout_width="120dp"
-            android:layout_height="115dp"
-             
+
             app:srcCompat="@android:drawable/alert_dark_frame"
             android:id="@+id/player3ImageView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
             app:border="true"
             app:border_color="#EEEEEE"
             app:border_width="4dp"
             app:shadow="true"
-            style="@style/buttonStyle"/>
-
-        <com.pkmmte.view.CircularImageView
-            android:layout_width="120dp"
-            android:layout_height="115dp"
-             
-            app:srcCompat="@android:drawable/alert_dark_frame"
-            android:id="@+id/player7ImageView"
-            android:layout_row="2"
-            android:layout_column="0"
+            style="@style/buttonStyle"
+            />
+        <TextView
+            android:text="TextView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
             app:border="true"
             app:border_color="#EEEEEE"
             app:border_width="4dp"
             app:shadow="true"
-            style="@style/buttonStyle"/>
-
-        <com.pkmmte.view.CircularImageView
-            android:layout_width="120dp"
-            android:layout_height="115dp"
-             
-            app:srcCompat="@android:drawable/alert_dark_frame"
-            android:id="@+id/player8ImageView"
+            android:id="@+id/player1TextView"
+            style="@style/textStyle" />
+        <TextView
+            android:text="TextView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
             app:border="true"
             app:border_color="#EEEEEE"
             app:border_width="4dp"
             app:shadow="true"
-            style="@style/buttonStyle"/>
-
-        <com.pkmmte.view.CircularImageView
-            android:layout_width="120dp"
-            android:layout_height="115dp"
-             
-            app:srcCompat="@android:drawable/alert_dark_frame"
-            android:id="@+id/player9ImageView"
+            android:id="@+id/player2TextView"
+            style="@style/textStyle" />
+        <TextView
+            android:text="TextView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
             app:border="true"
             app:border_color="#EEEEEE"
             app:border_width="4dp"
             app:shadow="true"
-            style="@style/buttonStyle"/>
-
+            android:id="@+id/player3TextView"
+            style="@style/textStyle" />
         <com.pkmmte.view.CircularImageView
-            android:layout_width="120dp"
-            android:layout_height="115dp"
-             
-            app:srcCompat="@android:drawable/alert_dark_frame"
-            android:id="@+id/player5ImageView"
-            android:layout_row="1"
-            android:layout_column="1"
-            app:border="true"
-            app:border_color="#EEEEEE"
-            app:border_width="4dp"
-            app:shadow="true"
-            style="@style/buttonStyle"/>
 
-        <com.pkmmte.view.CircularImageView
-            android:layout_width="120dp"
-            android:layout_height="115dp"
-             
-            app:srcCompat="@android:drawable/alert_dark_frame"
-            android:id="@+id/player6ImageView"
-            android:layout_row="1"
-            android:layout_column="2"
-            app:border="true"
-            app:border_color="#EEEEEE"
-            app:border_width="4dp"
-            app:shadow="true"
-            style="@style/buttonStyle"/>
-
-        <com.pkmmte.view.CircularImageView
-            android:layout_width="120dp"
-            android:layout_height="115dp"
-             
-            app:srcCompat="@android:drawable/alert_dark_frame"
-            android:id="@+id/player10ImageView"
-            android:layout_row="3"
-            android:layout_column="0"
-            app:border="true"
-            app:border_color="#EEEEEE"
-            app:border_width="4dp"
-            app:shadow="true"
-            style="@style/buttonStyle"/>
-
-        <com.pkmmte.view.CircularImageView
-            android:layout_width="120dp"
-            android:layout_height="115dp"
-             
-            app:srcCompat="@android:drawable/alert_dark_frame"
-            android:id="@+id/player11ImageView"
-            android:layout_row="3"
-            android:layout_column="1"
-            app:border="true"
-            app:border_color="#EEEEEE"
-            app:border_width="4dp"
-            app:shadow="true"
-            style="@style/buttonStyle"/>
-
-        <com.pkmmte.view.CircularImageView
-            android:layout_width="120dp"
-            android:layout_height="115dp"
-             
-            app:srcCompat="@android:drawable/alert_dark_frame"
-            android:id="@+id/player12ImageView"
-            android:layout_row="3"
-            android:layout_column="2"
-            app:border="true"
-            app:border_color="#EEEEEE"
-            app:border_width="4dp"
-            app:shadow="true"
-            style="@style/buttonStyle"/>
-
-        <com.pkmmte.view.CircularImageView
-            android:layout_width="120dp"
-            android:layout_height="115dp"
-             
-            app:srcCompat="@android:drawable/alert_dark_frame"
-            android:id="@+id/player13ImageView"
-            android:layout_row="4"
-            android:layout_column="0"
-            app:border="true"
-            app:border_color="#EEEEEE"
-            app:border_width="4dp"
-            app:shadow="true"
-            style="@style/buttonStyle"/>
-
-        <com.pkmmte.view.CircularImageView
-            android:layout_width="120dp"
-            android:layout_height="115dp"
-             
-            app:srcCompat="@android:drawable/alert_dark_frame"
-            android:id="@+id/player14ImageView"
-            android:layout_row="4"
-            android:layout_column="1"
-            app:border="true"
-            app:border_color="#EEEEEE"
-            app:border_width="4dp"
-            app:shadow="true"
-            style="@style/buttonStyle"/>
-
-        <com.pkmmte.view.CircularImageView
-            android:layout_width="120dp"
-            android:layout_height="115dp"
-             
-            app:srcCompat="@android:drawable/alert_dark_frame"
-            android:id="@+id/player15ImageView"
-            android:layout_row="4"
-            android:layout_column="2"
-            app:border="true"
-            app:border_color="#EEEEEE"
-            app:border_width="4dp"
-            app:shadow="true"
-            style="@style/buttonStyle"/>
-
-        <com.pkmmte.view.CircularImageView
-            android:layout_width="120dp"
-            android:layout_height="115dp"
-             
             app:srcCompat="@android:drawable/alert_dark_frame"
             android:id="@+id/player4ImageView"
-            android:layout_row="1"
-            android:layout_column="0"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
             app:border="true"
             app:border_color="#EEEEEE"
             app:border_width="4dp"
             app:shadow="true"
-            style="@style/buttonStyle"/>
+            style="@style/buttonStyle"
+            />
+        <com.pkmmte.view.CircularImageView
+
+            app:srcCompat="@android:drawable/alert_dark_frame"
+            android:id="@+id/player5ImageView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            style="@style/buttonStyle"
+            />
+        <com.pkmmte.view.CircularImageView
+
+            app:srcCompat="@android:drawable/alert_dark_frame"
+            android:id="@+id/player6ImageView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            style="@style/buttonStyle"
+            />
+        <TextView
+            android:text="TextView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/player4TextView"
+            style="@style/textStyle" />
+        <TextView
+            android:text="TextView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/player5TextView"
+            style="@style/textStyle" />
+        <TextView
+            android:text="TextView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/player6TextView"
+            style="@style/textStyle" />
+        <com.pkmmte.view.CircularImageView
+
+            app:srcCompat="@android:drawable/alert_dark_frame"
+            android:id="@+id/player7ImageView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            style="@style/buttonStyle"
+            />
+        <com.pkmmte.view.CircularImageView
+
+            app:srcCompat="@android:drawable/alert_dark_frame"
+            android:id="@+id/player8ImageView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            style="@style/buttonStyle"
+            />
+        <com.pkmmte.view.CircularImageView
+
+            app:srcCompat="@android:drawable/alert_dark_frame"
+            android:id="@+id/player9ImageView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            style="@style/buttonStyle"
+            />
+        <TextView
+            android:text="TextView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/player7TextView"
+            style="@style/textStyle" />
+        <TextView
+            android:text="TextView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/player8TextView"
+            style="@style/textStyle" />
+        <TextView
+            android:text="TextView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/player9TextView"
+            style="@style/textStyle" />
+        <com.pkmmte.view.CircularImageView
+
+            app:srcCompat="@android:drawable/alert_dark_frame"
+            android:id="@+id/player10ImageView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            style="@style/buttonStyle"
+            />
+        <com.pkmmte.view.CircularImageView
+
+            app:srcCompat="@android:drawable/alert_dark_frame"
+            android:id="@+id/player11ImageView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            style="@style/buttonStyle"
+            />
+        <com.pkmmte.view.CircularImageView
+
+            app:srcCompat="@android:drawable/alert_dark_frame"
+            android:id="@+id/player12ImageView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            style="@style/buttonStyle"
+            />
+        <TextView
+            android:text="TextView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/player10TextView"
+            style="@style/textStyle" />
+        <TextView
+            android:text="TextView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/player11TextView"
+            style="@style/textStyle" />
+        <TextView
+
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/player12TextView"
+            style="@style/textStyle" />
+        <com.pkmmte.view.CircularImageView
+
+            app:srcCompat="@android:drawable/alert_dark_frame"
+            android:id="@+id/player13ImageView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            style="@style/buttonStyle"
+            />
+        <com.pkmmte.view.CircularImageView
+
+            app:srcCompat="@android:drawable/alert_dark_frame"
+            android:id="@+id/player14ImageView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            style="@style/buttonStyle"
+            />
+        <com.pkmmte.view.CircularImageView
+
+            app:srcCompat="@android:drawable/alert_dark_frame"
+            android:id="@+id/player15ImageView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            style="@style/buttonStyle"
+            />
+        <TextView
+            android:text="TextView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/player13TextView"
+            style="@style/textStyle" />
+        <TextView
+            android:text="TextView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/player14TextView"
+            style="@style/textStyle" />
+        <TextView
+            android:text="TextView"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"
+            grid:layout_gravity="fill"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="4dp"
+            app:shadow="true"
+            android:id="@+id/player15TextView"
+            style="@style/textStyle" />
 
 
 
-    </GridLayout>
-    </RelativeLayout>
+
+    </android.support.v7.widget.GridLayout>
+
 </ScrollView>

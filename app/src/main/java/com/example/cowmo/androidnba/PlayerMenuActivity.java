@@ -10,8 +10,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.pkmmte.view.CircularImageView;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -30,6 +32,8 @@ public class PlayerMenuActivity extends Activity {
             ,player8ImageView,player9ImageView,player10ImageView,player11ImageView,player12ImageView,player13ImageView,player14ImageView, player15ImageView;
     private Intent myIntent, statsIntent;
     public String[] playerName,stringSeasons;
+    private TextView player1TextView,player2TextView,player3TextView,player4TextView,player5TextView,player6TextView,player7TextView,player8TextView,
+            player9TextView,player10TextView,player11TextView,player12TextView, player13TextView, player14TextView, player15TextView;
     public int[] playerId;
     private boolean haveMatched = true;
 
@@ -38,6 +42,23 @@ public class PlayerMenuActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.player_menu);
         statsIntent = new Intent(this, StatsActivity.class);
+        player1TextView = (TextView)findViewById(R.id.player1TextView);
+        player2TextView = (TextView)findViewById(R.id.player2TextView);
+        player3TextView = (TextView)findViewById(R.id.player3TextView);
+        player4TextView = (TextView)findViewById(R.id.player4TextView);
+        player5TextView = (TextView)findViewById(R.id.player5TextView);
+        player6TextView = (TextView)findViewById(R.id.player6TextView);
+        player7TextView = (TextView)findViewById(R.id.player7TextView);
+        player8TextView = (TextView)findViewById(R.id.player8TextView);
+        player9TextView = (TextView)findViewById(R.id.player9TextView);
+        player10TextView = (TextView)findViewById(R.id.player10TextView);
+        player11TextView = (TextView)findViewById(R.id.player11TextView);
+        player12TextView = (TextView)findViewById(R.id.player12TextView);
+        player13TextView = (TextView)findViewById(R.id.player13TextView);
+        player14TextView = (TextView)findViewById(R.id.player14TextView);
+        player15TextView = (TextView)findViewById(R.id.player15TextView);
+
+
         player1ImageView = (CircularImageView)findViewById(R.id.player1ImageView);
         player2ImageView = (CircularImageView)findViewById(R.id.player2ImageView);
         player3ImageView = (CircularImageView)findViewById(R.id.player3ImageView);
@@ -268,21 +289,46 @@ public class PlayerMenuActivity extends Activity {
         if (haveMatched) {
             separatePlayerNameAndId(team);
             loadImage(String.valueOf(playerId[0]), player1ImageView);
+            player1TextView.setText(playerName[0]);
             loadImage(String.valueOf(playerId[1]), player2ImageView);
+            player2TextView.setText(playerName[1]);
+
             loadImage(String.valueOf(playerId[2]), player3ImageView);
+            player3TextView.setText(playerName[2]);
             loadImage(String.valueOf(playerId[3]), player4ImageView);
+            player4TextView.setText(playerName[3]);
+
             loadImage(String.valueOf(playerId[4]), player5ImageView);
+            player5TextView.setText(playerName[4]);
             loadImage(String.valueOf(playerId[5]), player6ImageView);
+            player6TextView.setText(playerName[5]);
+
             loadImage(String.valueOf(playerId[6]), player7ImageView);
+            player7TextView.setText(playerName[6]);
             loadImage(String.valueOf(playerId[7]), player8ImageView);
+            player8TextView.setText(playerName[7]);
+
             loadImage(String.valueOf(playerId[8]), player9ImageView);
+            player9TextView.setText(playerName[8]);
             loadImage(String.valueOf(playerId[9]), player10ImageView);
+            player10TextView.setText(playerName[9]);
+
             loadImage(String.valueOf(playerId[10]), player11ImageView);
+            player11TextView.setText(playerName[10]);
             loadImage(String.valueOf(playerId[11]), player12ImageView);
+            player12TextView.setText(playerName[11]);
+
             loadImage(String.valueOf(playerId[12]), player13ImageView);
+            player13TextView.setText(playerName[12]);
             loadImage(String.valueOf(playerId[13]), player14ImageView);
-            if(playerId.length > 14)
+            player14TextView.setText(playerName[13]);
+
+            if(playerId.length > 14){
                 loadImage(String.valueOf(playerId[14]), player15ImageView);
+                player15TextView.setText(playerName[14]);
+            }
+
+
             //player1ImageView
             for(int i = 0; i < playerId.length; i++){
 
@@ -341,7 +387,17 @@ public class PlayerMenuActivity extends Activity {
 
                     //  .placeholder(R.drawable.placeholder)
                     //  .error(R.drawable.placeholder)
-                    .into(image);
+                    .into(image, new Callback() {
+                        @Override
+                        public void onSuccess() {
+
+                        }
+
+                        @Override
+                        public void onError() {
+                            // place picasso run in here with placeholder
+                        }
+                    });
         }
         catch (Exception ex){
             Log.i("1", ex.getMessage());
