@@ -11,10 +11,12 @@
         android:id="@+id/picker"
         android:textColor="#000000"
         android:textSize="22sp"
-        android:ellipsize="marquee"
-        android:marqueeRepeatLimit="-1"
+        android:ellipsize="none"
+        android:marqueeRepeatLimit="2"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
 
-        picker:dividerSize="@dimen/activity_vertical_margin"
+        picker:dividerSize="@dimen/small"
         picker:sideItems="@integer/numSideItems"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
@@ -100,6 +102,7 @@
         </android.support.v7.widget.GridLayout>
 
 
+
     <android.support.v7.widget.GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -110,19 +113,19 @@
         <TextView
             android:text="FG Made:"
             grid:layout_columnWeight="1"
-            grid:layout_rowWeight="1"
-            grid:layout_gravity="fill"
+
+            grid:layout_gravity="fill_horizontal"
             app:border="true"
             app:border_color="#EEEEEE"
             app:border_width="4dp"
             app:shadow="true"
             android:id="@+id/fgmTextView"
             style="@style/secondaryStatsStyle" />
+
         <TextView
             android:text="FG 3's Made:"
             grid:layout_columnWeight="1"
-            grid:layout_rowWeight="1"
-            grid:layout_gravity="fill"
+            grid:layout_gravity="fill_horizontal"
             app:border="true"
             app:border_color="#EEEEEE"
             app:border_width="4dp"
@@ -132,8 +135,7 @@
         <TextView
             android:text="FG Attempted:"
             grid:layout_columnWeight="1"
-            grid:layout_rowWeight="1"
-            grid:layout_gravity="fill"
+            grid:layout_gravity="fill_horizontal"
             app:border="true"
             app:border_color="#EEEEEE"
             app:border_width="4dp"
@@ -143,8 +145,7 @@
         <TextView
             android:text="FG 3's Attempted"
             grid:layout_columnWeight="1"
-            grid:layout_rowWeight="1"
-            grid:layout_gravity="fill"
+            grid:layout_gravity="fill_horizontal"
             app:border="true"
             app:border_color="#EEEEEE"
             app:border_width="4dp"
@@ -154,8 +155,7 @@
         <TextView
             android:text="FG Percentage:"
             grid:layout_columnWeight="1"
-            grid:layout_rowWeight="1"
-            grid:layout_gravity="fill"
+            grid:layout_gravity="fill_horizontal"
             app:border="true"
             app:border_color="#EEEEEE"
             app:border_width="4dp"
@@ -165,8 +165,7 @@
         <TextView
             android:text="FG 3's Percentage:"
             grid:layout_columnWeight="1"
-            grid:layout_rowWeight="1"
-            grid:layout_gravity="fill"
+            grid:layout_gravity="fill_horizontal"
             app:border="true"
             app:border_color="#EEEEEE"
             app:border_width="4dp"
@@ -176,8 +175,7 @@
         <TextView
             android:text="Free Throws Made:"
             grid:layout_columnWeight="1"
-            grid:layout_rowWeight="1"
-            grid:layout_gravity="fill"
+            grid:layout_gravity="fill_horizontal"
             app:border="true"
             app:border_color="#EEEEEE"
             app:border_width="4dp"
@@ -187,8 +185,7 @@
         <TextView
             android:text="Defensive Rebounds:"
             grid:layout_columnWeight="1"
-            grid:layout_rowWeight="1"
-            grid:layout_gravity="fill"
+            grid:layout_gravity="fill_horizontal"
             app:border="true"
             app:border_color="#EEEEEE"
             app:border_width="4dp"
@@ -198,8 +195,7 @@
         <TextView
             android:text="Free Throws Attempted:"
             grid:layout_columnWeight="1"
-            grid:layout_rowWeight="1"
-            grid:layout_gravity="fill"
+            grid:layout_gravity="fill_horizontal"
             app:border="true"
             app:border_color="#EEEEEE"
             app:border_width="4dp"
@@ -209,8 +205,7 @@
         <TextView
             android:text="Offensive Rebounds"
             grid:layout_columnWeight="1"
-            grid:layout_rowWeight="1"
-            grid:layout_gravity="fill"
+            grid:layout_gravity="fill_horizontal"
             app:border="true"
             app:border_color="#EEEEEE"
             app:border_width="4dp"
@@ -220,8 +215,7 @@
         <TextView
             android:text="Free Throws Percentage:"
             grid:layout_columnWeight="1"
-            grid:layout_rowWeight="1"
-            grid:layout_gravity="fill"
+            grid:layout_gravity="fill_horizontal"
             app:border="true"
             app:border_color="#EEEEEE"
             app:border_width="4dp"
@@ -231,8 +225,7 @@
         <TextView
             android:text="Total Rebounds"
             grid:layout_columnWeight="1"
-            grid:layout_rowWeight="1"
-            grid:layout_gravity="fill"
+            grid:layout_gravity="fill_horizontal"
             app:border="true"
             app:border_color="#EEEEEE"
             app:border_width="4dp"
@@ -242,8 +235,7 @@
         <TextView
             android:text="Assists:"
             grid:layout_columnWeight="1"
-            grid:layout_rowWeight="1"
-            grid:layout_gravity="fill"
+            grid:layout_gravity="fill_horizontal"
             app:border="true"
             app:border_color="#EEEEEE"
             app:border_width="4dp"
@@ -253,8 +245,7 @@
         <TextView
             android:text="Blocks:"
             grid:layout_columnWeight="1"
-            grid:layout_rowWeight="1"
-            grid:layout_gravity="fill"
+            grid:layout_gravity="fill_horizontal"
             app:border="true"
             app:border_color="#EEEEEE"
             app:border_width="4dp"
@@ -264,8 +255,7 @@
         <TextView
             android:text="Turnovers:"
             grid:layout_columnWeight="1"
-            grid:layout_rowWeight="1"
-            grid:layout_gravity="fill"
+            grid:layout_gravity="fill_horizontal"
             app:border="true"
             app:border_color="#EEEEEE"
             app:border_width="4dp"
@@ -275,8 +265,7 @@
         <TextView
             android:text="Personal Fouls:"
             grid:layout_columnWeight="1"
-            grid:layout_rowWeight="1"
-            grid:layout_gravity="fill"
+            grid:layout_gravity="fill_horizontal"
             app:border="true"
             app:border_color="#EEEEEE"
             app:border_width="4dp"
@@ -286,8 +275,7 @@
         <TextView
             android:text="Points:"
             grid:layout_columnWeight="1"
-            grid:layout_rowWeight="1"
-            grid:layout_gravity="fill"
+            grid:layout_gravity="fill_horizontal"
             app:border="true"
             app:border_color="#EEEEEE"
             app:border_width="4dp"

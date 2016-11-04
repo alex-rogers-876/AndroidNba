@@ -169,7 +169,13 @@ public class MenuActivity extends Activity {
                 startActivity(statsIntent);
             }
         });
-
+        hornetsImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                statsIntent.putExtra("teamName","Hornets");
+                startActivity(statsIntent);
+            }
+        });
         bullsImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

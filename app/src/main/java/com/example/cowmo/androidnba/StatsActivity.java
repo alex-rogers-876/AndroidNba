@@ -178,23 +178,23 @@ public class StatsActivity extends Activity {
             ptsResult.setText(Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mPoints));
             rebResult.setText(Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mTotalRebounds));
             astResult.setText(Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mAssists));
-            fgMade.setText("FG Made: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mAssists));
-            fgAttempted.setText("FG Attempted: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mAssists));
-            fgPercent.setText("FG Percentage: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mAssists));
-            ftMade.setText("FG Made: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mAssists));
-            ftAttempted.setText("FG Made: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mAssists));
-            ftPercent.setText("FG Made: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mAssists));
-            ast.setText("FG Made: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mAssists));
-            turnover.setText("FG Made: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mAssists));
-            ptsSecond.setText("FG Made: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mAssists));
-            fg3Made.setText("FG Made: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mAssists));
-            fg3Attempted.setText("FG Made: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mAssists));
-            fg3Percent.setText("FG Made: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mAssists));
-            defRebound.setText("FG Made: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mAssists));
-            offRebound.setText("FG Made: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mAssists));
-            totRebound.setText("FG Made: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mAssists));
-            blocks.setText("FG Made: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mAssists));
-            fouls.setText("FG Made: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mAssists));
+            fgMade.setText("FG Made: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mFieldGoalsMade));
+            fgAttempted.setText("FG Attempted: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mFieldGoalsAttempted));
+            fgPercent.setText("FG Percentage: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mFieldGoalPercent));
+            ftMade.setText("FT Made: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mFreeThrowsMade));
+            ftAttempted.setText("FT Attempted: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mFreeThrowsAttempted));
+            ftPercent.setText("FT Percentage: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mFreeThrowsPercent));
+            ast.setText("Assists: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mAssists));
+            turnover.setText("Turnovers: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mTurnoversPerGame));
+            ptsSecond.setText("PPG: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mPoints));
+            fg3Made.setText("FG 3's Made: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mFieldGoalsThreeMade));
+            fg3Attempted.setText("FG 3's Attempted: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mFieldGoalsThreeAttempted));
+            fg3Percent.setText("FG 3's Percentage: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mFieldGoalsThreePercent));
+            defRebound.setText("Defensive Rebounds: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mDefensiveRebounds));
+            offRebound.setText("Offensive Rebounds: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mOffensiveRebounds));
+            totRebound.setText("Total Rebounds: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mTotalRebounds));
+            blocks.setText("Blocks: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mBlocks));
+            fouls.setText("Fouls: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mPersonalFouls));
 
 
         }
@@ -204,6 +204,23 @@ public class StatsActivity extends Activity {
             ptsResult.setText(Float.toString(allSeasonData.body().get(index).mPoints));
             rebResult.setText(Float.toString(allSeasonData.body().get(index).mTotalRebounds));
             astResult.setText(Float.toString(allSeasonData.body().get(index).mAssists));
+            fgMade.setText("FG Made: " + Float.toString(allSeasonData.body().get(index).mFieldGoalsMade));
+            fgAttempted.setText("FG Attempted: " + Float.toString(allSeasonData.body().get(index).mFieldGoalsAttempted));
+            fgPercent.setText("FG Percentage: " + Float.toString(allSeasonData.body().get(index).mFieldGoalPercent));
+            ftMade.setText("FT Made: " + Float.toString(allSeasonData.body().get(index).mFreeThrowsMade));
+            ftAttempted.setText("FT Attempted: " + Float.toString(allSeasonData.body().get(index).mFreeThrowsAttempted));
+            ftPercent.setText("FT Percentage: " + Float.toString(allSeasonData.body().get(index).mFreeThrowsPercent));
+            ast.setText("Assists: " + Float.toString(allSeasonData.body().get(index).mAssists));
+            turnover.setText("Turnovers: " + Float.toString(allSeasonData.body().get(index).mTurnoversPerGame));
+            ptsSecond.setText("PPG: " + Float.toString(allSeasonData.body().get(index).mPoints));
+            fg3Made.setText("FG 3's Made: " + Float.toString(allSeasonData.body().get(index).mFieldGoalsThreeMade));
+            fg3Attempted.setText("FG 3's Attempted: " + Float.toString(allSeasonData.body().get(index).mFieldGoalsThreeAttempted));
+            fg3Percent.setText("FG 3's Percentage: " + Float.toString(allSeasonData.body().get(index).mFieldGoalsThreePercent));
+            defRebound.setText("Defensive Rebounds: " + Float.toString(allSeasonData.body().get(index).mDefensiveRebounds));
+            offRebound.setText("Offensive Rebounds: " + Float.toString(allSeasonData.body().get(index).mOffensiveRebounds));
+            totRebound.setText("Total Rebounds: " + Float.toString(allSeasonData.body().get(index).mTotalRebounds));
+            blocks.setText("Blocks: " + Float.toString(allSeasonData.body().get(index).mBlocks));
+            fouls.setText("Fouls: " + Float.toString(allSeasonData.body().get(index).mPersonalFouls));
         }
 
         @Override
