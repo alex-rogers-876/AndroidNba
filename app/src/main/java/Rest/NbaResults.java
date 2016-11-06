@@ -113,6 +113,9 @@ public class NbaResults {
     @Expose
     public float mPoints;
 
+
+
+
     public NbaResults(int id, String seasonId, String leagueId, long teamId, String teamAbrv, int playerAge, int gamesPlayed, int gamesStarted, float minutes, float fgm, float fga,
                       float fgPercent, float fg3m, float fg3a, float fg3Percent, float ftm, float fta, float ftPercent, float oReb, float dReb, float totReb, float ast, float stl,
                       float blk, float tov, float pf, float pts){

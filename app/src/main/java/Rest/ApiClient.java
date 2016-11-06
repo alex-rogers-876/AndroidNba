@@ -28,7 +28,7 @@ public class ApiClient extends Activity {
 
         public static APIPlug REST_CLIENT;
     //9
-        //private static final String API_URL = "http://192.168.1.9:3000"; //Change according to your API path.
+        //private static final String API_URL = "http://192.168.1.11:3000"; //Change according to your API path.
     private static final String API_URL = "https://shrouded-reaches-29303.herokuapp.com";
         static MainActivity mActivity= new MainActivity();
        // static Async mAsync = new Async();

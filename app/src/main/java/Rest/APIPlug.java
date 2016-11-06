@@ -11,4 +11,8 @@ import retrofit2.http.Query;
 public interface APIPlug {
     @GET("/nba")
     Call<List<NbaResults>> createStats(@Query("playerId") int id);
+
+    @GET("/nba/info")
+    Call<NbaInfo> createInfo(@Query("playerId") int id);
+
 }

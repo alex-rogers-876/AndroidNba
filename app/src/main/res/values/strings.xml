@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">AndroidNba</string>
+    <string name="app_name">NBA Stats</string>
     <string name="playerTitle">Choose Player</string>
+
 </resources>

@@ -28,7 +28,7 @@ import retrofit2.Response;
  */
 
 public class PlayerMenuActivity extends Activity {
-    public CircularImageView player1ImageView,player2ImageView,player3ImageView,player4ImageView,player5ImageView,player6ImageView,player7ImageView
+    private CircularImageView player1ImageView,player2ImageView,player3ImageView,player4ImageView,player5ImageView,player6ImageView,player7ImageView
             ,player8ImageView,player9ImageView,player10ImageView,player11ImageView,player12ImageView,player13ImageView,player14ImageView, player15ImageView;
     private Intent myIntent, statsIntent;
     public String[] playerName,stringSeasons;
@@ -248,7 +248,7 @@ public class PlayerMenuActivity extends Activity {
             case "Mavericks":
                 team = getResources().getStringArray(R.array.Mavericks);
                 break;
-            case "Nuggers":
+            case "Nuggets":
                 team = getResources().getStringArray(R.array.Nuggets);
                 break;
             case "Timberwolves":
@@ -327,18 +327,9 @@ public class PlayerMenuActivity extends Activity {
                 loadImage(String.valueOf(playerId[14]), player15ImageView);
                 player15TextView.setText(playerName[14]);
             }
-
-
-            //player1ImageView
-            for(int i = 0; i < playerId.length; i++){
-
+            else {
+                player15TextView.setText("");
             }
-
-
-                        //new MainActivity.MyAsyncTask().execute(playerId[position]);
-
-                      //  Log.i("1", ex.getMessage());
-            //tv1.setText(splitTeam[1]);
         }
     }
 

@@ -6,16 +6,22 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.pkmmte.view.CircularImageView;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 import com.wefika.horizontalpicker.HorizontalPicker;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
-
+import java.lang.Object;
 import Rest.ApiClient;
+import Rest.NbaInfo;
 import Rest.NbaResults;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -27,20 +33,27 @@ import static com.example.cowmo.androidnba.R.id.picker;
  */
 
 public class StatsActivity extends Activity {
-    public static Response<List<NbaResults>> allSeasonData;
+    public Response<NbaInfo> infoResponse;
+    public  Response<List<NbaResults>> allSeasonData;
     public String[] playerName,stringSeasons;
     private HorizontalPicker picker;
     private Intent myIntent;
     public Intent teamIntent;
     private int playerId;
+    private CircularImageView playerImage;
     private static TextView  ptsResult, astResult, rebResult, fgMade, fgAttempted, fgPercent, ftMade, ftAttempted, ftPercent, ast, turnover,
-    ptsSecond, fg3Made, fg3Attempted, fg3Percent, defRebound, offRebound, totRebound, blocks, fouls;
+    ptsSecond, fg3Made, fg3Attempted, fg3Percent, defRebound, offRebound, totRebound, blocks, fouls, infoText;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_stats_view_test);
-        picker = (HorizontalPicker) findViewById(R.id.picker);
+        playerImage = (CircularImageView) findViewById(R.id.imagePlayerStats);
+        infoText = (TextView)findViewById(R.id.infoTextView);
+       // playerImage.setBorderWidth(4);
+        picker= (HorizontalPicker) findViewById(R.id.picker);
+
         ptsResult = (TextView)findViewById(R.id.ptsTextView);
         rebResult = (TextView)findViewById(R.id.rebTextView);
         astResult = (TextView)findViewById(R.id.astTextView);
@@ -52,7 +65,7 @@ public class StatsActivity extends Activity {
         ftPercent = (TextView)findViewById(R.id.ftpTextView);
         ast = (TextView)findViewById(R.id.astSmallTextView);
         turnover = (TextView)findViewById(R.id.toTextView);
-        ptsSecond = (TextView)findViewById(R.id.ptsSmallTextView);
+        //ptsSecond = (TextView)findViewById(R.id.ptsSmallTextView);
         fg3Made = (TextView)findViewById(R.id.fgm3TextView);
         fg3Attempted = (TextView)findViewById(R.id.fga3TextView);
         fg3Percent = (TextView)findViewById(R.id.fg3pTextView);
@@ -65,6 +78,8 @@ public class StatsActivity extends Activity {
         myIntent = getIntent(); // gets the previously created intent
 
         playerId = myIntent.getIntExtra("playerId", 0); // will return "FirstKeyValue"
+
+        loadImage(String.valueOf(playerId), playerImage);
         try {
             new MyAsyncTask().execute(playerId);
 
@@ -102,16 +117,20 @@ public class StatsActivity extends Activity {
 
         @Override
         protected Response<List<NbaResults>>  doInBackground(Integer... params) {
-            Response<List<NbaResults>> responsey = null;
+            Response<List<NbaResults>> statsResponse = null;
+            infoResponse = null;
             Call<List<NbaResults>> call = apiy.REST_CLIENT.createStats(params[0]);
+            Call<NbaInfo> infoCall = apiy.REST_CLIENT.createInfo(params[0]);
             teamIntent =  new Intent(getApplicationContext(), TeamMenuActivity.class);
 
             try{
-                responsey =  call.execute() ;
-                return responsey;
+                infoResponse = infoCall.execute();
+                statsResponse =  call.execute() ;
+
+                return statsResponse;
 
             }
-            catch (IOException ex){
+            catch (Exception ex){
                 progDailog.dismiss();
                // Toast.makeText(getApplicationContext(),"OMG",Toast.LENGTH_LONG);
 
@@ -134,17 +153,19 @@ public class StatsActivity extends Activity {
                 seasonSelector = new SeasonSelector();
                 ArrayAdapter<String> seasonAdaptor;
                 stringSeasons = new String[strings.body().size()];
-
+                int k = strings.body().size() -1 ;
                 for(int i = 0; i < strings.body().size(); i++){
                     stringSeasons[i] = strings.body().get(i).mSeasonId.toString();
+                    
                 }
+               // Collections.reverse(stringSeasons);
                 // mActivity.setSeasonSpinner(stringSeasons);
 
                 // myIntent.putExtra("Seasons", stringSeasons);
                 //  startActivity(myIntent);
                 // mNumberpicker.setDisplayedValues(stringSeasons);
                 picker.setValues(stringSeasons);
-
+               // picker.setSelectedItem(allSeasonData.body().size());
 
             }
             catch (Exception ex){
@@ -153,82 +174,222 @@ public class StatsActivity extends Activity {
 
 
             progDailog.dismiss();
-            picker.setSelectedItem(allSeasonData.body().size());
+
+
            // picker.setSelectedItem(allSeasonData.body().size());
             // mActivity.showData(response);
+
             }
             else{
 
                 //startActivity(playerIntent);
              //  startActivity(playerIntent);
+                Toast.makeText(getApplicationContext(), "Player has no stats to display", Toast.LENGTH_LONG).show();
                 startActivity(teamIntent);
+                finish();
             }
 
         }
 
 
     }
-    public class SeasonSelector implements HorizontalPicker.OnItemClicked, HorizontalPicker.OnItemSelected {
+class SeasonSelector implements HorizontalPicker.OnItemClicked, HorizontalPicker.OnItemSelected {
 
         public SeasonSelector(){
-            HorizontalPicker picker = (HorizontalPicker) findViewById(R.id.picker);
+
             picker.setOnItemClickedListener(this);
             picker.setOnItemSelectedListener(this);
 
-            ptsResult.setText(Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mPoints));
-            rebResult.setText(Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mTotalRebounds));
-            astResult.setText(Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mAssists));
-            fgMade.setText("FG Made: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mFieldGoalsMade));
-            fgAttempted.setText("FG Attempted: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mFieldGoalsAttempted));
-            fgPercent.setText("FG Percentage: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mFieldGoalPercent));
-            ftMade.setText("FT Made: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mFreeThrowsMade));
-            ftAttempted.setText("FT Attempted: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mFreeThrowsAttempted));
-            ftPercent.setText("FT Percentage: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mFreeThrowsPercent));
-            ast.setText("Assists: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mAssists));
-            turnover.setText("Turnovers: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mTurnoversPerGame));
-            ptsSecond.setText("PPG: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mPoints));
-            fg3Made.setText("FG 3's Made: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mFieldGoalsThreeMade));
-            fg3Attempted.setText("FG 3's Attempted: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mFieldGoalsThreeAttempted));
-            fg3Percent.setText("FG 3's Percentage: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mFieldGoalsThreePercent));
-            defRebound.setText("Defensive Rebounds: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mDefensiveRebounds));
-            offRebound.setText("Offensive Rebounds: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mOffensiveRebounds));
-            totRebound.setText("Total Rebounds: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mTotalRebounds));
-            blocks.setText("Blocks: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mBlocks));
-            fouls.setText("Fouls: " + Float.toString(allSeasonData.body().get(allSeasonData.body().size()-1).mPersonalFouls));
+          //  infoResponse.body().get(0).height;
+//Float.toString(allSeasonData.body().get(0).mPoints)
+            // %Position:%Height%Weight:
+          Collections.reverse(allSeasonData.body());
+            StringBuilder sb = new StringBuilder();
+            sb.append("Name: " + infoResponse.body().displayFirstLast + "\nPosition: " + infoResponse.body().position + "\nHeight: " +
+                    infoResponse.body().height + "\nWeight: " + infoResponse.body().weight + "\n" + "Team Name: " + grabTeamNameFromAbrv(allSeasonData.body().get(0).mTeamAbrv));
+            infoText.setText(sb.toString());
+            infoText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            ptsResult.setText(Float.toString(allSeasonData.body().get(0).mPoints));
+            rebResult.setText(Float.toString(allSeasonData.body().get(0).mTotalRebounds));
+            astResult.setText(Float.toString(allSeasonData.body().get(0).mAssists));
+            fgMade.setText("FGM: " + Float.toString(allSeasonData.body().get(0).mFieldGoalsMade));
+            fgAttempted.setText("FGA: " + Float.toString(allSeasonData.body().get(0).mFieldGoalsAttempted));
+            fgPercent.setText("FG %: " + Float.toString(allSeasonData.body().get(0).mFieldGoalPercent * 100) + "%");
+            ftMade.setText("FTM: " + Float.toString(allSeasonData.body().get(0).mFreeThrowsMade));
+            ftAttempted.setText("FTA: " + Float.toString(allSeasonData.body().get(0).mFreeThrowsAttempted));
+            ftPercent.setText("FT %: " + Float.toString(allSeasonData.body().get(0).mFreeThrowsPercent* 100) + "%");
+            ast.setText("AST: " + Float.toString(allSeasonData.body().get(0).mAssists));
+            turnover.setText("TO: " + Float.toString(allSeasonData.body().get(0).mTurnoversPerGame));
+            //ptsSecond.setText("PPG: " + Float.toString(allSeasonData.body().get(0).mPoints));
+            fg3Made.setText("FG3M: " + Float.toString(allSeasonData.body().get(0).mFieldGoalsThreeMade));
+            fg3Attempted.setText("FG3A: " + Float.toString(allSeasonData.body().get(0).mFieldGoalsThreeAttempted));
+            fg3Percent.setText("FG3 %: " + Float.toString(allSeasonData.body().get(0).mFieldGoalsThreePercent* 100) + "%");
+            defRebound.setText("DREB: " + Float.toString(allSeasonData.body().get(0).mDefensiveRebounds));
+            offRebound.setText("OREB: " + Float.toString(allSeasonData.body().get(0).mOffensiveRebounds));
+            totRebound.setText("TOT REB: " + Float.toString(allSeasonData.body().get(0).mTotalRebounds));
+            blocks.setText("BLKS: " + Float.toString(allSeasonData.body().get(0).mBlocks));
+            fouls.setText("FLS: " + Float.toString(allSeasonData.body().get(0).mPersonalFouls));
 
 
         }
 
         @Override
         public void onItemSelected(int index)    {
+            StringBuilder sb = new StringBuilder();
+            sb.append("Name: " + infoResponse.body().displayFirstLast + "\nPosition: " + infoResponse.body().position + "\nHeight: " +
+                    infoResponse.body().height + "\nWeight: " + infoResponse.body().weight + "\n" + "Team Name: " + grabTeamNameFromAbrv(allSeasonData.body().get(index).mTeamAbrv));
+
+            infoText.setText(sb.toString());
+            infoText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             ptsResult.setText(Float.toString(allSeasonData.body().get(index).mPoints));
             rebResult.setText(Float.toString(allSeasonData.body().get(index).mTotalRebounds));
             astResult.setText(Float.toString(allSeasonData.body().get(index).mAssists));
-            fgMade.setText("FG Made: " + Float.toString(allSeasonData.body().get(index).mFieldGoalsMade));
-            fgAttempted.setText("FG Attempted: " + Float.toString(allSeasonData.body().get(index).mFieldGoalsAttempted));
-            fgPercent.setText("FG Percentage: " + Float.toString(allSeasonData.body().get(index).mFieldGoalPercent));
-            ftMade.setText("FT Made: " + Float.toString(allSeasonData.body().get(index).mFreeThrowsMade));
-            ftAttempted.setText("FT Attempted: " + Float.toString(allSeasonData.body().get(index).mFreeThrowsAttempted));
-            ftPercent.setText("FT Percentage: " + Float.toString(allSeasonData.body().get(index).mFreeThrowsPercent));
-            ast.setText("Assists: " + Float.toString(allSeasonData.body().get(index).mAssists));
-            turnover.setText("Turnovers: " + Float.toString(allSeasonData.body().get(index).mTurnoversPerGame));
-            ptsSecond.setText("PPG: " + Float.toString(allSeasonData.body().get(index).mPoints));
-            fg3Made.setText("FG 3's Made: " + Float.toString(allSeasonData.body().get(index).mFieldGoalsThreeMade));
-            fg3Attempted.setText("FG 3's Attempted: " + Float.toString(allSeasonData.body().get(index).mFieldGoalsThreeAttempted));
-            fg3Percent.setText("FG 3's Percentage: " + Float.toString(allSeasonData.body().get(index).mFieldGoalsThreePercent));
-            defRebound.setText("Defensive Rebounds: " + Float.toString(allSeasonData.body().get(index).mDefensiveRebounds));
-            offRebound.setText("Offensive Rebounds: " + Float.toString(allSeasonData.body().get(index).mOffensiveRebounds));
-            totRebound.setText("Total Rebounds: " + Float.toString(allSeasonData.body().get(index).mTotalRebounds));
-            blocks.setText("Blocks: " + Float.toString(allSeasonData.body().get(index).mBlocks));
-            fouls.setText("Fouls: " + Float.toString(allSeasonData.body().get(index).mPersonalFouls));
+            fgMade.setText("FGM: " + Float.toString(allSeasonData.body().get(index).mFieldGoalsMade));
+
+            fgAttempted.setText("FGA: " + Float.toString(allSeasonData.body().get(index).mFieldGoalsAttempted));
+            fgPercent.setText("FG %: " + String.format("%.2f",allSeasonData.body().get(index).mFieldGoalPercent* 100) + "%");
+            ftMade.setText("FTM: " + Float.toString(allSeasonData.body().get(index).mFreeThrowsMade));
+            ftAttempted.setText("FTA: " + Float.toString(allSeasonData.body().get(index).mFreeThrowsAttempted));
+            ftPercent.setText("FT %: " + String.format("%.2f",allSeasonData.body().get(index).mFreeThrowsPercent* 100) + "%");
+            ast.setText("AST: " + Float.toString(allSeasonData.body().get(index).mAssists));
+            turnover.setText("TO: " + Float.toString(allSeasonData.body().get(index).mTurnoversPerGame));
+          //  ptsSecond.setText("PPG: " + Float.toString(allSeasonData.body().get(index).mPoints));
+            fg3Made.setText("FG3M: " + Float.toString(allSeasonData.body().get(index).mFieldGoalsThreeMade));
+            fg3Attempted.setText("FG3A: " + Float.toString(allSeasonData.body().get(index).mFieldGoalsThreeAttempted));
+            fg3Percent.setText("FG3 %: " + String.format("%.2f",allSeasonData.body().get(index).mFieldGoalsThreePercent* 100) + "%");
+            defRebound.setText("DREB: " + Float.toString(allSeasonData.body().get(index).mDefensiveRebounds));
+            offRebound.setText("OREB: " + Float.toString(allSeasonData.body().get(index).mOffensiveRebounds));
+            totRebound.setText("TOT REB: " + Float.toString(allSeasonData.body().get(index).mTotalRebounds));
+            blocks.setText("BLKS: " + Float.toString(allSeasonData.body().get(index).mBlocks));
+            fouls.setText("FLS: " + Float.toString(allSeasonData.body().get(index).mPersonalFouls));
         }
 
         @Override
         public void onItemClicked(int index) {
-            // Toast.makeText(this, "Item clicked", Toast.LENGTH_SHORT).show();
-            //ptsResult.setText(Float.toString(allSeasonData.body().get(index).mPoints));
-            // rebResult.setText(Float.toString(allSeasonData.body().get(index).mTotalRebounds));
-            //  astResult.setText(Float.toString(allSeasonData.body().get(index).mAssists));
+            StringBuilder sb = new StringBuilder();
+            sb.append("Name: " + infoResponse.body().displayFirstLast + "\nPosition: " + infoResponse.body().position + "\nHeight: " +
+                    infoResponse.body().height + "\nWeight: " + infoResponse.body().weight + "\n" + "Team Name: " + grabTeamNameFromAbrv(allSeasonData.body().get(index).mTeamAbrv));
+
+            infoText.setText(sb.toString());
+            infoText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            ptsResult.setText(Float.toString(allSeasonData.body().get(index).mPoints));
+            rebResult.setText(Float.toString(allSeasonData.body().get(index).mTotalRebounds));
+            astResult.setText(Float.toString(allSeasonData.body().get(index).mAssists));
+            fgMade.setText("FGM: " + Float.toString(allSeasonData.body().get(index).mFieldGoalsMade));
+
+            fgAttempted.setText("FGA: " + Float.toString(allSeasonData.body().get(index).mFieldGoalsAttempted));
+            fgPercent.setText("FG %: " + String.format("%.2f",allSeasonData.body().get(index).mFieldGoalPercent* 100) + "%");
+            ftMade.setText("FTM: " + Float.toString(allSeasonData.body().get(index).mFreeThrowsMade));
+            ftAttempted.setText("FTA: " + Float.toString(allSeasonData.body().get(index).mFreeThrowsAttempted));
+            ftPercent.setText("FT %: " + String.format("%.2f",allSeasonData.body().get(index).mFreeThrowsPercent* 100) + "%");
+            ast.setText("AST: " + Float.toString(allSeasonData.body().get(index).mAssists));
+            turnover.setText("TO: " + Float.toString(allSeasonData.body().get(index).mTurnoversPerGame));
+            //  ptsSecond.setText("PPG: " + Float.toString(allSeasonData.body().get(index).mPoints));
+            fg3Made.setText("FG3M: " + Float.toString(allSeasonData.body().get(index).mFieldGoalsThreeMade));
+            fg3Attempted.setText("FG3A: " + Float.toString(allSeasonData.body().get(index).mFieldGoalsThreeAttempted));
+            fg3Percent.setText("FG3 %: " + String.format("%.2f",allSeasonData.body().get(index).mFieldGoalsThreePercent* 100) + "%");
+            defRebound.setText("DREB: " + Float.toString(allSeasonData.body().get(index).mDefensiveRebounds));
+            offRebound.setText("OREB: " + Float.toString(allSeasonData.body().get(index).mOffensiveRebounds));
+            totRebound.setText("TOT REB: " + Float.toString(allSeasonData.body().get(index).mTotalRebounds));
+            blocks.setText("BLKS: " + Float.toString(allSeasonData.body().get(index).mBlocks));
+            fouls.setText("FLS: " + Float.toString(allSeasonData.body().get(index).mPersonalFouls));
+        }
+    }
+    public String grabTeamNameFromAbrv(String teamAbrv){
+        switch (teamAbrv){
+            case "ATL":
+                return "Atlanta Hawks";
+            case "BOS":
+                return "Boston Celtics";
+            case "BKN":
+                return "Brooklyn Nets";
+            case "CHA":
+                return "Charlotte Hornets";
+            case "CHI":
+                return "Chicago Bulls";
+            case "CLE":
+                return "Cleveland Cavaliers";
+            case "DAL":
+                return "Dallas Mavericks";
+            case "DEN":
+                return "Denver Nuggets";
+            case "DET":
+                return "Detroit Pistons";
+            case "GSW":
+                return "Golden State Warriors";
+            case "HOU":
+                return "Houston Rockets";
+            case "IND":
+                return "Indiana Pacers";
+            case "LAC":
+                return "LA Clippers";
+            case "LAL":
+                return "LA Lakers";
+            case "MEM":
+                return "Memphis Grizzlies";
+            case "MIA":
+                return "Miami Heat";
+            case "MIL":
+                return "Milwaukee Bucks";
+            case "MIN":
+                return "Minnesota Timberwolves";
+            case "NOP":
+                return "New Orleans Pelicans";
+            case "NYK":
+                return "New York Knicks";
+            case "OKC":
+                return "Oklahoma City Thunder";
+            case "ORL":
+                return "Orlando Magic";
+            case "PHI":
+                return "Philadelphia 76ers";
+            case "PHE":
+                return "Pheonix Suns";
+            case "POR":
+                return "Portland Trailblazers";
+            case "SAC":
+                return "Sacremento Kings";
+            case "SAS":
+                return "San Antonio Spurs";
+            case "TOR":
+                return "Toronto Raptors";
+            case "UTA":
+                return "Utah Jazz";
+            case "WAS":
+                return "Washington Wizards";
+            case "TOT":
+                return "Entire Season";
+
+            default:
+                return teamAbrv;
+
+        }
+    }
+    public void loadImage(String url, CircularImageView image) {
+        try {
+
+
+            Picasso.with(StatsActivity.this)
+                    .load("https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/" + url + ".png")
+                    .placeholder(R.drawable.progress_animation)
+                    .fit()
+
+                    //  .placeholder(R.drawable.placeholder)
+                    //  .error(R.drawable.placeholder)
+                    .into(image, new Callback() {
+                        @Override
+                        public void onSuccess() {
+
+                        }
+
+                        @Override
+                        public void onError() {
+                            // place picasso run in here with placeholder
+                        }
+                    });
+        }
+        catch (Exception ex){
+            Log.i("1", ex.getMessage());
         }
     }
 
